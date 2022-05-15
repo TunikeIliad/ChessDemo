@@ -9,6 +9,7 @@ import java.awt.*;
 import java.util.List;
 
 /**
+ * 这个是用来测试GitHub是否更新的
  * 这个类表示面板上的棋盘组件对象
  */
 public class Chessboard extends JComponent {
