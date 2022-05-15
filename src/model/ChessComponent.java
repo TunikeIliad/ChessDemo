@@ -38,6 +38,7 @@ public abstract class ChessComponent extends JComponent {
     private ChessboardPoint chessboardPoint;
     protected final ChessColor chessColor;
     private boolean selected;
+    protected Chessboard chessboard;//王不吃王
 
     protected ChessComponent(ChessboardPoint chessboardPoint, Point location, ChessColor chessColor, ClickController clickController, int size) {
         enableEvents(AWTEvent.MOUSE_EVENT_MASK);
@@ -68,6 +69,7 @@ public abstract class ChessComponent extends JComponent {
     public void setSelected(boolean selected) {
         this.selected = selected;
     }
+    public void setChessboard(Chessboard chessboard){this.chessboard = chessboard;}//王不吃王
 
     /**
      * @param another 主要用于和另外一个棋子交换位置
