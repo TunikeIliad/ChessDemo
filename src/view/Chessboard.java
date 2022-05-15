@@ -31,6 +31,7 @@ public class Chessboard extends JComponent {
     //all chessComponents in this chessboard are shared only one model controller
     private final ClickController clickController = new ClickController(this);
     private final int CHESS_SIZE;
+    private ChessboardPoint blackKingPoint, whiteKingPoint;
 
 
     public Chessboard(int width, int height) {
@@ -144,6 +145,9 @@ public class Chessboard extends JComponent {
         ChessComponent chessComponent = new KingChessComponent(new ChessboardPoint(row, col), calculatePoint(row, col), color, clickController, CHESS_SIZE);
         chessComponent.setVisible(true);
         putChessOnBoard(chessComponent);
+        if(color == ChessColor.BLACK)setBlackKingPoint(row, col);
+        else if(color == ChessColor.WHITE)setWhiteKingPoint(row, col);
+        chessComponent.setChessboard(this);
     }
     private void initKnightOnBoard(int row, int col, ChessColor color) {
         ChessComponent chessComponent = new KnightChessComponent(new ChessboardPoint(row, col), calculatePoint(row, col), color, clickController, CHESS_SIZE);
@@ -159,6 +163,19 @@ public class Chessboard extends JComponent {
         ChessComponent chessComponent = new PawnChessComponent(new ChessboardPoint(row, col), calculatePoint(row, col), color, clickController, CHESS_SIZE);
         chessComponent.setVisible(true);
         putChessOnBoard(chessComponent);
+    }
+    
+    public void setBlackKingPoint(int x, int y){
+        blackKingPoint = new ChessboardPoint(x,y);
+    }
+    public ChessboardPoint getBlackKingPoint(){
+        return blackKingPoint;
+    }
+    public void setWhiteKingPoint(int x, int y){
+        whiteKingPoint = new ChessboardPoint(x,y);
+    }
+    public ChessboardPoint getWhiteKingPoint(){
+        return whiteKingPoint;
     }
 
     public void resetBoard(){
