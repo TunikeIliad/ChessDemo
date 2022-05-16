@@ -14,7 +14,7 @@ public class ChessGameFrame extends JFrame {
     private final int WIDTH;
     private final int HEIGTH;
     public final int CHESSBOARD_SIZE;
-    public Chessboard board;
+    public Chessboard chessboard;
     private GameController gameController;
     JLabel statusLabe;
 
@@ -40,11 +40,11 @@ public class ChessGameFrame extends JFrame {
      * 在游戏面板中添加棋盘
      */
     private void addChessboard() {
-        Chessboard chessboard = new Chessboard(CHESSBOARD_SIZE, CHESSBOARD_SIZE);
+        chessboard = new Chessboard(CHESSBOARD_SIZE, CHESSBOARD_SIZE);
         gameController = new GameController(chessboard);
         chessboard.setLocation(HEIGTH / 10, HEIGTH / 10);
-        setBoard(chessboard);
-        add(board);
+        chessboard.setFrame(this);
+        add(chessboard);
     }
 
     /**
@@ -64,8 +64,8 @@ public class ChessGameFrame extends JFrame {
         add(statusLabe);
     }
 
-    public void setStatusLabeText(int a) {
-        if(a%2==0){
+    public void setStatusLabeText(ChessColor cl) {
+        if(cl==ChessColor.BLACK){
             statusLabe.setText("黑色方");
         }
         else{
@@ -84,16 +84,12 @@ public class ChessGameFrame extends JFrame {
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         button.addActionListener((e) ->
                 {
-                        remove(board);
+                        chessboard.setVisible(false);
+                        remove(chessboard);
                         addChessboard();
-                        board.setVisible(true);
                 }
         );
         add(button);
-    }
-
-    public void setBoard(Chessboard board) {
-        this.board = board;
     }
 
     //存档按钮
