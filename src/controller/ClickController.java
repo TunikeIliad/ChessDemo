@@ -12,6 +12,7 @@ public class ClickController {
     private final Chessboard chessboard;
     private ChessComponent first;
 
+
     public ClickController(Chessboard chessboard) {
         this.chessboard = chessboard;
     }
@@ -33,7 +34,8 @@ public class ClickController {
                 //repaint in swap chess method.
                 chessboard.swapChessComponents(first, chessComponent);
                 chessboard.swapColor();
-
+                chessboard.turn++;
+                chessboard.frame.setStatusLabeText(chessboard.turn);
                 first.setSelected(false);
                 first = null;
             }

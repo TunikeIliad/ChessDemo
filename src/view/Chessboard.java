@@ -9,7 +9,6 @@ import java.awt.*;
 import java.util.List;
 
 /**
- * 这个是用来测试GitHub是否更新的
  * 这个类表示面板上的棋盘组件对象
  */
 public class Chessboard extends JComponent {
@@ -25,13 +24,29 @@ public class Chessboard extends JComponent {
      * currentColor: 当前行棋方
      */
     private static final int CHESSBOARD_SIZE = 8;
-
+    public int turn=0;
+    public ChessGameFrame frame;
     private final ChessComponent[][] chessComponents = new ChessComponent[CHESSBOARD_SIZE][CHESSBOARD_SIZE];
     private ChessColor currentColor = ChessColor.BLACK;
     //all chessComponents in this chessboard are shared only one model controller
     private final ClickController clickController = new ClickController(this);
     private final int CHESS_SIZE;
     private ChessboardPoint blackKingPoint, whiteKingPoint;
+
+    //各棋子
+    private int rook=0;
+    private int knight=0;
+    private int bishop=0;
+    private int pawn=0;
+    private int king=0;
+    private int queen=0;
+    private ChessComponent Rooks[]=new ChessComponent[4];
+    private ChessComponent Knights[]=new ChessComponent[4];
+    private ChessComponent Bishops[]=new ChessComponent[4];
+    private ChessComponent Pawns[]=new ChessComponent[16];
+    private ChessComponent Kings[]=new ChessComponent[2];
+    private ChessComponent Queens[]=new ChessComponent[2];
+
 
 
     public Chessboard(int width, int height) {
@@ -134,11 +149,15 @@ public class Chessboard extends JComponent {
     private void initRookOnBoard(int row, int col, ChessColor color) {
         ChessComponent chessComponent = new RookChessComponent(new ChessboardPoint(row, col), calculatePoint(row, col), color, clickController, CHESS_SIZE);
         chessComponent.setVisible(true);
+        Rooks[rook]=chessComponent;
+        rook++;
         putChessOnBoard(chessComponent);
     }
     private void initQueenOnBoard(int row, int col, ChessColor color) {
         ChessComponent chessComponent = new QueenChessComponent(new ChessboardPoint(row, col), calculatePoint(row, col), color, clickController, CHESS_SIZE);
         chessComponent.setVisible(true);
+        Queens[queen]=chessComponent;
+        queen++;
         putChessOnBoard(chessComponent);
     }
     private void initKingOnBoard(int row, int col, ChessColor color) {
@@ -147,21 +166,29 @@ public class Chessboard extends JComponent {
         putChessOnBoard(chessComponent);
         if(color == ChessColor.BLACK)setBlackKingPoint(row, col);
         else if(color == ChessColor.WHITE)setWhiteKingPoint(row, col);
+        Kings[king]=chessComponent;
+        king++;
         chessComponent.setChessboard(this);
     }
     private void initKnightOnBoard(int row, int col, ChessColor color) {
         ChessComponent chessComponent = new KnightChessComponent(new ChessboardPoint(row, col), calculatePoint(row, col), color, clickController, CHESS_SIZE);
         chessComponent.setVisible(true);
+        Knights[knight]=chessComponent;
+        knight++;
         putChessOnBoard(chessComponent);
     }
     private void initBishopOnBoard(int row, int col, ChessColor color) {
         ChessComponent chessComponent = new BishopChessComponent(new ChessboardPoint(row, col), calculatePoint(row, col), color, clickController, CHESS_SIZE);
         chessComponent.setVisible(true);
+        Bishops[bishop]=chessComponent;
+        bishop++;
         putChessOnBoard(chessComponent);
     }
     private void initPawnOnBoard(int row, int col, ChessColor color) {
         ChessComponent chessComponent = new PawnChessComponent(new ChessboardPoint(row, col), calculatePoint(row, col), color, clickController, CHESS_SIZE);
         chessComponent.setVisible(true);
+        Pawns[pawn]=chessComponent;
+        pawn++;
         putChessOnBoard(chessComponent);
     }
     
@@ -179,7 +206,6 @@ public class Chessboard extends JComponent {
     }
 
     public void resetBoard(){
-        initBoard();
     }
 
     @Override
@@ -195,5 +221,9 @@ public class Chessboard extends JComponent {
 
     public void loadGame(List<String> chessData) {
         chessData.forEach(System.out::println);
+    }
+
+    public void setFrame(ChessGameFrame frame) {
+        this.frame = frame;
     }
 }

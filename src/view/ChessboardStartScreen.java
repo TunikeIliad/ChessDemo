@@ -41,6 +41,7 @@ public class ChessboardStartScreen extends JFrame{
                 setVisible(false); //Set the window to visible
                 ChessGameFrame mainFrame = new ChessGameFrame(1000, 760);
                 mainFrame.setVisible(true);
+                mainFrame.board.setFrame(mainFrame);
             }
         });
         setBounds(30,20,WIDTH,HEIGTH);
