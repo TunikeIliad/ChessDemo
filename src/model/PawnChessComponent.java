@@ -15,11 +15,11 @@ public class PawnChessComponent extends ChessComponent{
 
     public void loadResource() throws IOException {
         if (PAWN_WHITE == null) {
-            PAWN_WHITE = ImageIO.read(new File("./images/Pawn-white.png"));
+            PAWN_WHITE = ImageIO.read(new File("./images/pawn-white.png"));
         }
 
         if (PAWN_BLACK == null) {
-            PAWN_BLACK = ImageIO.read(new File("./images/Pawn-black.png"));
+            PAWN_BLACK = ImageIO.read(new File("./images/pawn-black.png"));
         }
     }
 
@@ -43,38 +43,51 @@ public class PawnChessComponent extends ChessComponent{
 
     @Override
     public boolean canMoveTo(ChessComponent[][] chessComponents, ChessboardPoint destination) {
-        ChessboardPoint source = getChessboardPoint();ChessColor color = getChessColor();
+        ChessboardPoint source = getChessboardPoint();ChessColor color = getChessColor();//System.out.println(color);
         int x0 = source.getX(), x1 = destination.getX();
-        if((getChessColor() == ChessColor.BLACK && source.getX() == 1) || (getChessColor() == ChessColor.WHITE && source.getX() == 6)){
-            if(source.getY() == destination.getY() && Math.abs(destination.getX()-source.getX())==2){
-                if (!(chessComponents[destination.getX()][destination.getY()] instanceof EmptySlotComponent))
-                    return false;
+        if(color == ChessColor.BLACK){
+            if(Math.abs(destination.getY()-source.getY())==1){
+                if(x0+1 == x1){
+                    if (!(chessComponents[x0+1][destination.getY()] instanceof EmptySlotComponent))
+                        return true;
+                }
+                else return false;
             }
-        }
-        if(source.getY() == destination.getY()){
-            if((color == ChessColor.BLACK && x0+1 == x1) || (color == ChessColor.WHITE && x0-1 == x1)){
-                if (!(chessComponents[x1][destination.getY()] instanceof EmptySlotComponent))
-                    return false;
-            }
-            if((color == ChessColor.BLACK && x0 == 1 && x0+2 == x1) || (color == ChessColor.WHITE && x0 == 6 && x0-2 == x1)){
-
-            }
-        }
-        if(chessColor == ChessColor.BLACK){
             if(source.getY() == destination.getY()){
                 if(x0 == 1 && x0+2 == x1){
-                    while(x0 < x1){
-                        if (!(chessComponents[x0+1][destination.getY()] instanceof EmptySlotComponent)){
-                            return false;
-                        }
-                        else x0++;
-                    }
+                    if (!(chessComponents[x0+1][destination.getY()] instanceof EmptySlotComponent) ||
+                            !(chessComponents[x0+2][destination.getY()] instanceof EmptySlotComponent))
+                        return false;
                 }
                 else if(x0+1 == x1){
                     if (!(chessComponents[x0+1][destination.getY()] instanceof EmptySlotComponent))
                         return false;
                 }
+                else return false;
             }
+            else return false;
+        }
+        if(color == ChessColor.WHITE){
+            if(Math.abs(destination.getY()-source.getY())==1){
+                if(x0-1 == x1){
+                    if (!(chessComponents[x0-1][destination.getY()] instanceof EmptySlotComponent))
+                        return true;
+                }
+                else return false;
+            }
+            if(source.getY() == destination.getY()){
+                if(x0 == 6 && x0-2 == x1){
+                    if (!(chessComponents[x0-1][destination.getY()] instanceof EmptySlotComponent) ||
+                            !(chessComponents[x0-2][destination.getY()] instanceof EmptySlotComponent))
+                        return false;
+                }
+                else if(x0-1 == x1){
+                    if (!(chessComponents[x0-1][destination.getY()] instanceof EmptySlotComponent))
+                        return false;
+                }
+                else return false;
+            }
+            else return false;
 
         }
         return true;

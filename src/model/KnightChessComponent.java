@@ -15,11 +15,11 @@ public class KnightChessComponent extends ChessComponent{
 
     public void loadResource() throws IOException {
         if (KNIGHT_WHITE == null) {
-            KNIGHT_WHITE = ImageIO.read(new File("./images/Knight-white.png"));
+            KNIGHT_WHITE = ImageIO.read(new File("./images/knight-white.png"));
         }
 
         if (KNIGHT_BLACK == null) {
-            KNIGHT_BLACK = ImageIO.read(new File("./images/Knight-black.png"));
+            KNIGHT_BLACK = ImageIO.read(new File("./images/knight-black.png"));
         }
     }
 
@@ -46,9 +46,9 @@ public class KnightChessComponent extends ChessComponent{
         ChessboardPoint source = getChessboardPoint();
         if((Math.abs(destination.getX()-source.getX()) == 1 && Math.abs(destination.getY()-source.getY()) == 2) ||
                 (Math.abs(destination.getX()-source.getX()) == 2 && Math.abs(destination.getY()-source.getY()) == 1)) {
-                if (!(chessComponents[destination.getX()][destination.getY()] instanceof EmptySlotComponent))
-                    return false;
-            }
+            if ((chessComponents[destination.getX()][destination.getY()] instanceof EmptySlotComponent))
+                return true;
+        }
         else{return false;}
         return true;
     }
@@ -64,5 +64,5 @@ public class KnightChessComponent extends ChessComponent{
             g.drawOval(0, 0, getWidth() , getHeight());
         }
     }
-    
+
 }
