@@ -1,6 +1,6 @@
 package model;
 
-import view.Chessboard;//王不吃王
+
 import view.ChessboardPoint;
 import controller.ClickController;
 
@@ -49,16 +49,15 @@ public class KingChessComponent extends ChessComponent{
         int lengthY = destination.getY()-source.getY();
         if((lengthX-lengthX%2)/2 != 0 || (lengthY-lengthY%2)/2 != 0)
                 return false;
-        else{
-            if(!(chessComponents[destination.getX()][destination.getY()] instanceof EmptySlotComponent))
+        else{//王不能吃王
+            int anotherKingX = (getChessColor() == ChessColor.BLACK)?
+                    chessboard.getWhiteKingPoint().getX() : chessboard.getBlackKingPoint().getX();
+            int anotherKingY = (getChessColor() == ChessColor.BLACK)?
+                    chessboard.getWhiteKingPoint().getY() : chessboard.getBlackKingPoint().getY();
+            int X = anotherKingX-destination.getX(), Y = anotherKingY-destination.getY();
+            System.out.println(anotherKingX);System.out.println(anotherKingY);
+            if((X-X%2)/2 == 0 && (Y-Y%2)/2 == 0)
                 return false;
-            /*else{
-                int a = (chessColor == ChessColor.WHITE)? chessboard.getBlackKingPoint().getX() : chessboard.getWhiteKingPoint().getX();
-                int b = (chessColor == ChessColor.WHITE)? chessboard.getBlackKingPoint().getY() : chessboard.getWhiteKingPoint().getY();
-                int c = (a-destination.getX())-(a-destination.getX())%2;System.out.println(a);System.out.println(b);
-                int d = (b-destination.getY())-(b-destination.getY())%2;
-                if(c/2 == 0 && d/2 == 0)return false;
-            }*/
         }
         return true;
     }

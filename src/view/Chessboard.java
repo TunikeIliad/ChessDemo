@@ -31,7 +31,8 @@ public class Chessboard extends JComponent {
     //all chessComponents in this chessboard are shared only one model controller
     private final ClickController clickController = new ClickController(this);
     private final int CHESS_SIZE;
-    private ChessboardPoint blackKingPoint, whiteKingPoint;
+    private ChessboardPoint blackKingPoint = new ChessboardPoint(0,CHESSBOARD_SIZE - 4),
+            whiteKingPoint = new ChessboardPoint(CHESSBOARD_SIZE - 1,CHESSBOARD_SIZE - 4);
 
     //各棋子
     private int rook=0;
@@ -90,6 +91,16 @@ public class Chessboard extends JComponent {
 
         chess1.repaint();
         chess2.repaint();
+        System.out.println(chess1.getChessboardPoint());
+        //每一次王行棋，王都存一次自己的位置
+        if(chess1 instanceof KingChessComponent){
+            if(chess1.getChessColor() == ChessColor.BLACK) setBlackKingPoint(chess1.getChessboardPoint());
+            else setWhiteKingPoint(chess1.getChessboardPoint());
+        }
+        //每一次行棋，各棋子存一次棋盘
+        for(ChessComponent[] c1 : chessComponents){
+            for(ChessComponent c : c1) c.setChessboard(this);
+        }
     }
 
     public void initiateEmptyChessboard() {
@@ -164,8 +175,6 @@ public class Chessboard extends JComponent {
         ChessComponent chessComponent = new KingChessComponent(new ChessboardPoint(row, col), calculatePoint(row, col), color, clickController, CHESS_SIZE);
         chessComponent.setVisible(true);
         putChessOnBoard(chessComponent);
-        if(color == ChessColor.BLACK)setBlackKingPoint(row, col);
-        else if(color == ChessColor.WHITE)setWhiteKingPoint(row, col);
         Kings[king]=chessComponent;
         king++;
         chessComponent.setChessboard(this);
@@ -192,14 +201,14 @@ public class Chessboard extends JComponent {
         putChessOnBoard(chessComponent);
     }
     
-    public void setBlackKingPoint(int x, int y){
-        blackKingPoint = new ChessboardPoint(x,y);
+    public void setBlackKingPoint(ChessboardPoint chessboardPoint){
+        blackKingPoint = chessboardPoint;
     }
     public ChessboardPoint getBlackKingPoint(){
         return blackKingPoint;
     }
-    public void setWhiteKingPoint(int x, int y){
-        whiteKingPoint = new ChessboardPoint(x,y);
+    public void setWhiteKingPoint(ChessboardPoint chessboardPoint){
+        whiteKingPoint = chessboardPoint;
     }
     public ChessboardPoint getWhiteKingPoint(){
         return whiteKingPoint;
