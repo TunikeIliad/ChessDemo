@@ -24,16 +24,13 @@ public class ChessboardStartScreen extends JFrame{
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
         setLayout(new FlowLayout(FlowLayout.LEADING,0,0));
 
-        JPanel jp=new JPanel();
         JLabel label=new JLabel();
         JButton button=new JButton("Start Game");
 
         button.setBounds(600,200,200,60);
         label.add(button);
         label.setIcon(chessboardStartScreen);
-        jp.add(label);
-
-        add(jp);
+        add(label);
 
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
