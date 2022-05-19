@@ -5,6 +5,8 @@ import model.ChessColor;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 
 /**
  * 这个类表示游戏过程中的整个游戏界面，是一切的载体
@@ -33,6 +35,7 @@ public class ChessGameFrame extends JFrame {
         addLabel();
         addResetButton();
         addLoadButton();
+        addSaveButton();
     }
 
 
@@ -87,15 +90,16 @@ public class ChessGameFrame extends JFrame {
                         chessboard.setVisible(false);
                         remove(chessboard);
                         addChessboard();
+                        setStatusLabeText(ChessColor.BLACK);
                 }
         );
         add(button);
     }
 
-    //存档按钮
+    //读档按钮
     private void addLoadButton() {
         JButton button = new JButton("Load");
-        button.setLocation(HEIGTH, HEIGTH / 10 + 240);
+        button.setLocation(HEIGTH, HEIGTH / 10 + 200);
         button.setSize(200, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
@@ -107,4 +111,22 @@ public class ChessGameFrame extends JFrame {
         });
     }
 
+    private void addSaveButton(){
+        JButton button = new JButton("Save");
+        button.setLocation(HEIGTH, HEIGTH / 10 + 280);
+        button.setSize(200, 60);
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        add(button);
+
+        button.addActionListener(e -> {
+            try {
+                PrintStream ps=new PrintStream("./resource/save1.txt");
+                System.setOut(ps);
+                System.out.print(chessboard.saveGame());
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            }
+
+        });
+    }
 }

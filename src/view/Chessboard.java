@@ -6,6 +6,9 @@ import controller.ClickController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,7 +27,6 @@ public class Chessboard extends JComponent {
      * currentColor: 当前行棋方
      */
     private static final int CHESSBOARD_SIZE = 8;
-    public int turn=0;
     public ChessGameFrame frame;
     private final ChessComponent[][] chessComponents = new ChessComponent[CHESSBOARD_SIZE][CHESSBOARD_SIZE];
     private ChessColor currentColor = ChessColor.BLACK;
@@ -230,6 +232,24 @@ public class Chessboard extends JComponent {
 
     public void loadGame(List<String> chessData) {
         chessData.forEach(System.out::println);
+    }
+
+    public String saveGame()  {
+        StringBuilder sb=new StringBuilder();
+        for(ChessComponent[] chesses:chessComponents){
+
+            for(ChessComponent chess:chesses){
+                sb.append(chess.Name());
+            }
+            sb.append("\n");
+        }
+        if(currentColor ==ChessColor.BLACK ){
+            sb.append("b");
+        }
+        else{
+            sb.append("w");
+        }
+        return sb.toString();
     }
 
     public void setFrame(ChessGameFrame frame) {

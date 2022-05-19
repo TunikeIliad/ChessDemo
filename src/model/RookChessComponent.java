@@ -24,7 +24,6 @@ public class RookChessComponent extends ChessComponent {
      * 车棋子对象自身的图片，是上面两种中的一种
      */
     private Image rookImage;
-
     /**
      * 读取加载车棋子的图片
      *
@@ -63,6 +62,10 @@ public class RookChessComponent extends ChessComponent {
     public RookChessComponent(ChessboardPoint chessboardPoint, Point location, ChessColor color, ClickController listener, int size) {
         super(chessboardPoint, location, color, listener, size);
         initiateRookImage(color);
+        if(color==ChessColor.BLACK)
+            name='R';
+        else
+            name='r';
     }
 
     /**

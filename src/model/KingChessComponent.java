@@ -39,6 +39,10 @@ public class KingChessComponent extends ChessComponent{
     public KingChessComponent(ChessboardPoint chessboardPoint, Point location, ChessColor color, ClickController listener, int size) {
         super(chessboardPoint, location, color, listener, size);
         initiateRookImage(color);
+        if(color==ChessColor.BLACK)
+            name='K';
+        else
+            name='k';
     }
 
 

@@ -39,6 +39,10 @@ public class PawnChessComponent extends ChessComponent{
     public PawnChessComponent(ChessboardPoint chessboardPoint, Point location, ChessColor color, ClickController listener, int size) {
         super(chessboardPoint, location, color, listener, size);
         initiatePawnImage(color);
+        if(color==ChessColor.BLACK)
+            name='P';
+        else
+            name='p';
     }
 
     @Override

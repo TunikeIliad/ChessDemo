@@ -2,9 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd1f5d18-243d-4722-b4d0-8241b5bc2d93" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/save1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resource/save1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/BishopChessComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/BishopChessComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ChessComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ChessComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/EmptySlotComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/EmptySlotComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/KingChessComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/KingChessComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/KnightChessComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/KnightChessComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/PawnChessComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/PawnChessComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/QueenChessComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/QueenChessComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/RookChessComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/RookChessComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ChessGameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ChessGameFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/Chessboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Chessboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ChessboardStartScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ChessboardStartScreen.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,6 +120,10 @@
       </pane>
       <pane id="PackagesPane" />
     </panes>
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
