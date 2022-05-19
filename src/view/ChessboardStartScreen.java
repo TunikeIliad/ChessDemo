@@ -31,7 +31,6 @@ public class ChessboardStartScreen extends JFrame{
         button.setBounds(600,200,200,60);
         label.add(button);
         label.setIcon(chessboardStartScreen);
-
         jp.add(label);
 
         add(jp);

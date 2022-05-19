@@ -6,7 +6,7 @@ import java.awt.*;
  * 这个类主要用于包装Color对象，用于Chess游戏使用。
  */
 public enum ChessColor {
-    BLACK("Black", Color.BLACK), WHITE("White", Color.WHITE), NONE("No Player", Color.WHITE);
+    BLACK("Black", Color.BLACK), WHITE("White", Color.WHITE), BLUE("Blue", Color.BLUE),NONE("No Player", Color.WHITE);
 
     private final String name;
     private final Color color;

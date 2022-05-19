@@ -19,8 +19,13 @@ public class ChessGameFrame extends JFrame {
     public Chessboard chessboard;
     private GameController gameController;
     JLabel statusLabe;
+    public JLabel label=new JLabel();
+    public Container container;
+    private static ImageIcon chessboardTheme1 =new ImageIcon("./images/theme1.jpg");
 
     public ChessGameFrame(int width, int height) {
+        container=this.getContentPane();
+        container.setLayout(null);
         setTitle("2022 CS102A Project Demo"); //设置标题
         this.WIDTH = width;
         this.HEIGTH = height;
@@ -31,29 +36,34 @@ public class ChessGameFrame extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
         setLayout(null);
 
-        addChessboard();
-        addLabel();
-        addResetButton();
-        addLoadButton();
-        addSaveButton();
+        label.setVisible(true);
+        label.setBounds(0,0,WIDTH,HEIGTH);
+        label.setIcon(chessboardTheme1);
+        container.add(label);
+
+        label.add(addChessboard());
+        label.add(addLabel());
+        label.add(addResetButton());
+        label.add(addLoadButton());
+        label.add(addSaveButton());
     }
 
 
     /**
      * 在游戏面板中添加棋盘
      */
-    private void addChessboard() {
+    private Chessboard addChessboard() {
         chessboard = new Chessboard(CHESSBOARD_SIZE, CHESSBOARD_SIZE);
         gameController = new GameController(chessboard);
         chessboard.setLocation(HEIGTH / 10, HEIGTH / 10);
         chessboard.setFrame(this);
-        add(chessboard);
+        return chessboard;
     }
 
     /**
      * 在游戏面板中添加标签
      */
-    private void addLabel() {
+    private JLabel addLabel() {
         JLabel statusLabel = new JLabel("行棋方是");
         statusLabel.setLocation(HEIGTH, HEIGTH / 10);
         statusLabel.setSize(200, 60);
@@ -64,7 +74,7 @@ public class ChessGameFrame extends JFrame {
         statusLabe2.setSize(200, 60);
         statusLabe2.setFont(new Font("Rockwell", Font.BOLD, 20));
         statusLabe=statusLabe2;
-        add(statusLabe);
+        return statusLabe;
     }
 
     public void setStatusLabeText(ChessColor cl) {
@@ -80,7 +90,7 @@ public class ChessGameFrame extends JFrame {
      * 重置游戏的按钮
      */
 
-    private void addResetButton() {
+    private JButton addResetButton() {
         JButton button = new JButton("Reset");
         button.setLocation(HEIGTH, HEIGTH / 10 + 120);
         button.setSize(200, 60);
@@ -89,25 +99,37 @@ public class ChessGameFrame extends JFrame {
                 {
                         chessboard.setVisible(false);
                         remove(chessboard);
-                        addChessboard();
+                        label.add(addChessboard());
                         setStatusLabeText(ChessColor.BLACK);
                 }
         );
-        add(button);
+        return button;
     }
 
     //读档按钮
-    private void addLoadButton() {
+    private JButton addLoadButton() {
         JButton button = new JButton("Load");
         button.setLocation(HEIGTH, HEIGTH / 10 + 200);
         button.setSize(200, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
-        add(button);
 
         button.addActionListener(e -> {
             System.out.println("Click load");
             String path ="./resource/"+JOptionPane.showInputDialog(this,"Input Path here");
-            if(path.contentEquals(".txt")){
+            if(!path.contains(".txt")){
+                JFrame errorTip = new JFrame("错误提示");
+                errorTip.setLocationRelativeTo(null);
+                errorTip.setSize(400,150);
+                JLabel textLabel = new JLabel("错误代码：104  文件格式错误");
+                textLabel.setSize(350, 90);
+                textLabel.setFont(new Font("Rockwell", Font.BOLD, 20));
+                textLabel.setVisible(true) ;
+                errorTip.setDefaultCloseOperation(errorTip.getDefaultCloseOperation()); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
+                errorTip.setLayout(null);
+                errorTip.add(textLabel);
+                errorTip.setVisible(true);
+            }
+            else{
                 chessboard.setVisible(false);
                 remove(chessboard);
                 chessboard = new Chessboard();
@@ -117,18 +139,15 @@ public class ChessGameFrame extends JFrame {
                 add(chessboard);
                 gameController.loadGameFromFile(path);
             }
-            else{
-
-            }
         });
+        return button;
     }
 
-    private void addSaveButton(){
+    private JButton addSaveButton(){
         JButton button = new JButton("Save");
         button.setLocation(HEIGTH, HEIGTH / 10 + 280);
         button.setSize(200, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
-        add(button);
 
         button.addActionListener(e -> {
             try {
@@ -140,5 +159,6 @@ public class ChessGameFrame extends JFrame {
                 ex.printStackTrace();
             }
         });
+        return button;
     }
 }
