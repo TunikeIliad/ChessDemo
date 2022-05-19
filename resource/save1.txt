@@ -1,16 +1,9 @@
-RNBQKBNR
-PPPP_P__
-________
-____P_PP
-___p_pp_
-________
-ppp_p__p
-rnbqkbnr
-bchessboard size = 608, chess size = 76
-Click [1,6]
-Click [3,6]
-(3,6) on the chessboard is clicked!
-Click [6,4]
-Click [4,4]
-(4,4) on the chessboard is clicked!
-Click [2,5]
+R_BQ_BNR
+PP_____P
+__NPK___
+__P_PPP_
+_p_ppp__
+__nq____
+p_p___pp
+r_b_kbnr
+w

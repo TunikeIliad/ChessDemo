@@ -19,6 +19,7 @@ public class GameController {
         try {
             List<String> chessData = Files.readAllLines(Paths.get(path));
             chessboard.loadGame(chessData);
+            System.out.println("load is run");
             return chessData;
         } catch (IOException e) {
             e.printStackTrace();

@@ -61,6 +61,13 @@ public class Chessboard extends JComponent {
         initiateEmptyChessboard();
         initBoard();
     }
+    public Chessboard() {
+        setLayout(null); // Use absolute layout.
+        setSize(608 , 608);
+        CHESS_SIZE = 608 / 8;
+        System.out.printf("chessboard size = %d, chess size = %d\n", 608, CHESS_SIZE);
+        initiateEmptyChessboard();
+    }
 
     public ChessComponent[][] getChessComponents() {
         return chessComponents;
@@ -216,9 +223,6 @@ public class Chessboard extends JComponent {
         return whiteKingPoint;
     }
 
-    public void resetBoard(){
-    }
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -231,7 +235,54 @@ public class Chessboard extends JComponent {
     }
 
     public void loadGame(List<String> chessData) {
-        chessData.forEach(System.out::println);
+        for(int j=0;j<8;j++){
+            for(int i=0;i<8;i++){
+                switch(chessData.get(j).charAt(i)){
+                    case 'K':
+                        initKingOnBoard(j, i, ChessColor.BLACK);
+                        break;
+                    case 'k':
+                        initKingOnBoard(j, i, ChessColor.WHITE);
+                        break;
+                    case'Q':
+                        initQueenOnBoard(j, i, ChessColor.BLACK);
+                        break;
+                    case'q':
+                        initQueenOnBoard(j, i, ChessColor.WHITE);
+                        break;
+                    case'R':
+                        initRookOnBoard(j, i, ChessColor.BLACK);
+                        break;
+                    case'r':
+                            initRookOnBoard(j, i, ChessColor.WHITE);
+                            break;
+                    case'B':
+                            initBishopOnBoard(j, i, ChessColor.BLACK);
+                            break;
+                    case'b':
+                            initBishopOnBoard(j, i, ChessColor.WHITE);
+                            break;
+                    case'N':
+                            initKnightOnBoard(j, i, ChessColor.BLACK);
+                            break;
+                    case'n':
+                            initKnightOnBoard(j, i, ChessColor.WHITE);
+                            break;
+                    case'P':
+                            initPawnOnBoard(j, i, ChessColor.BLACK);
+                            break;
+                    case'p':
+                            initPawnOnBoard(j, i, ChessColor.WHITE);
+                            break;
+                    }
+            }
+            if(chessData.get(8).equals("w")){
+                currentColor=ChessColor.WHITE;
+            }
+            else{
+                currentColor=ChessColor.BLACK;
+            }
+        }
     }
 
     public String saveGame()  {

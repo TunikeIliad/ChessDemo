@@ -106,8 +106,20 @@ public class ChessGameFrame extends JFrame {
 
         button.addActionListener(e -> {
             System.out.println("Click load");
-            String path = JOptionPane.showInputDialog(this,"Input Path here");
-            gameController.loadGameFromFile(path);
+            String path ="./resource/"+JOptionPane.showInputDialog(this,"Input Path here");
+            if(path.contentEquals(".txt")){
+                chessboard.setVisible(false);
+                remove(chessboard);
+                chessboard = new Chessboard();
+                gameController = new GameController(chessboard);
+                chessboard.setLocation(HEIGTH / 10, HEIGTH / 10);
+                chessboard.setFrame(this);
+                add(chessboard);
+                gameController.loadGameFromFile(path);
+            }
+            else{
+
+            }
         });
     }
 
@@ -123,10 +135,10 @@ public class ChessGameFrame extends JFrame {
                 PrintStream ps=new PrintStream("./resource/save1.txt");
                 System.setOut(ps);
                 System.out.print(chessboard.saveGame());
+                ps.close();
             } catch (FileNotFoundException ex) {
                 ex.printStackTrace();
             }
-
         });
     }
 }
