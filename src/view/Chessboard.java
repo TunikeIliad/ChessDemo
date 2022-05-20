@@ -234,7 +234,15 @@ public class Chessboard extends JComponent {
         return new Point(col * CHESS_SIZE, row * CHESS_SIZE);
     }
 
-    public void loadGame(List<String> chessData) {
+    public int loadGame(List<String> chessData) {
+        if(chessData.size()!=9){
+            if(chessData.get(chessData.size()-1).length()==1){
+                return 101;
+            }
+            else{
+                return 103;
+            }
+        }
         for(int j=0;j<8;j++){
             for(int i=0;i<8;i++){
                 switch(chessData.get(j).charAt(i)){
@@ -274,15 +282,21 @@ public class Chessboard extends JComponent {
                     case'p':
                             initPawnOnBoard(j, i, ChessColor.WHITE);
                             break;
+                    default:
+                        return 102;
                     }
             }
             if(chessData.get(8).equals("w")){
                 currentColor=ChessColor.WHITE;
             }
-            else{
+            else if(chessData.get(8).equals("b")){
                 currentColor=ChessColor.BLACK;
             }
+            else{
+                return 102;
+            }
         }
+        return 0;
     }
 
     public String saveGame()  {

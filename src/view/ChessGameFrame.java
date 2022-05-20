@@ -145,7 +145,49 @@ public class ChessGameFrame extends JFrame {
                 chessboard.setLocation(HEIGTH / 10, HEIGTH / 10);
                 chessboard.setFrame(this);
                 label.add(chessboard);
-                gameController.loadGameFromFile(path);
+                switch(gameController.loadGameFromFile(path)){
+                    case 0:
+                        break;
+                    case 101:
+                        JFrame errorTip = new JFrame("错误提示");
+                        errorTip.setLocationRelativeTo(null);
+                        errorTip.setSize(400,150);
+                        JLabel textLabel = new JLabel("错误代码：101  棋盘错误");
+                        textLabel.setSize(350, 90);
+                        textLabel.setFont(new Font("Rockwell", Font.BOLD, 20));
+                        textLabel.setVisible(true) ;
+                        errorTip.setDefaultCloseOperation(errorTip.getDefaultCloseOperation()); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
+                        errorTip.setLayout(null);
+                        errorTip.add(textLabel);
+                        errorTip.setVisible(true);
+                        break;
+                    case 102:
+                        JFrame errorTip1 = new JFrame("错误提示");
+                        errorTip1.setLocationRelativeTo(null);
+                        errorTip1.setSize(400,150);
+                        JLabel textLabel1 = new JLabel("错误代码：102  棋子错误");
+                        textLabel1.setSize(350, 90);
+                        textLabel1.setFont(new Font("Rockwell", Font.BOLD, 20));
+                        textLabel1.setVisible(true) ;
+                        errorTip1.setDefaultCloseOperation(errorTip1.getDefaultCloseOperation()); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
+                        errorTip1.setLayout(null);
+                        errorTip1.add(textLabel1);
+                        errorTip1.setVisible(true);
+                        break;
+                    case 103:
+                        JFrame errorTip2 = new JFrame("错误提示");
+                        errorTip2.setLocationRelativeTo(null);
+                        errorTip2.setSize(400,150);
+                        JLabel textLabel2 = new JLabel("错误代码：103  缺少行棋方");
+                        textLabel2.setSize(350, 90);
+                        textLabel2.setFont(new Font("Rockwell", Font.BOLD, 20));
+                        textLabel2.setVisible(true) ;
+                        errorTip2.setDefaultCloseOperation(errorTip2.getDefaultCloseOperation()); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
+                        errorTip2.setLayout(null);
+                        errorTip2.add(textLabel2);
+                        errorTip2.setVisible(true);
+                        break;
+                }
             }
         });
         return button;

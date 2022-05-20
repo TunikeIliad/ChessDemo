@@ -15,12 +15,11 @@ public class GameController {
         this.chessboard = chessboard;
     }
 
-    public List<String> loadGameFromFile(String path) {
+    public Integer loadGameFromFile(String path) {
         try {
             List<String> chessData = Files.readAllLines(Paths.get(path));
-            chessboard.loadGame(chessData);
-            System.out.println("load is run");
-            return chessData;
+            int a=chessboard.loadGame(chessData);
+            return a;
         } catch (IOException e) {
             e.printStackTrace();
         }
