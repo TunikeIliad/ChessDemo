@@ -7,7 +7,13 @@ import java.awt.event.ActionListener;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.applet.AudioClip;
+import java.io.*;
+import java.applet.Applet;
+import java.net.MalformedURLException;
+import java.net.URL;
 
+import static view.ChessboardStartScreen.setBgm;
 
 public class ChessboardStartScreen extends JFrame{
     private static ImageIcon chessboardStartScreen =new ImageIcon("./images/Chessboard.jpg");
@@ -31,6 +37,8 @@ public class ChessboardStartScreen extends JFrame{
         label.add(button);
         label.setIcon(chessboardStartScreen);
         add(label);
+        Thread1 th=new Thread1();
+        th.run();
 
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -44,5 +52,23 @@ public class ChessboardStartScreen extends JFrame{
         setVisible(true); //Set the window to visible
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //let the window can be close by click "x"
     }
+    public static void setBgm(){
+        try{
+            URL cb;
+            File f=new File("./music/bgm.wav");
+            cb=f.toURL();
+            AudioClip aau;
+            aau=Applet.newAudioClip(cb);
+            aau.loop();
+            System.out.println("bgm is run") ;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
 }
-
+class Thread1 extends Thread{
+    public Thread1 (){}
+    public void run(){
+        setBgm();
+    }
+}

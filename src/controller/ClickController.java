@@ -4,6 +4,7 @@ package controller;
 import model.ChessColor;
 import model.ChessComponent;
 import view.Chessboard;
+import view.Thread2;
 
 import javax.swing.*;
 import java.awt.*;

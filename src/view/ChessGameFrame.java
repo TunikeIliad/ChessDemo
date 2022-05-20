@@ -4,9 +4,16 @@ import controller.GameController;
 import model.ChessColor;
 
 import javax.swing.*;
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.*;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import static view.ChessboardStartScreen.setBgm;
 
 /**
  * 这个类表示游戏过程中的整个游戏界面，是一切的载体
@@ -38,6 +45,7 @@ public class ChessGameFrame extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
         setLayout(null);
 
+
         label.setVisible(true);
         label.setBounds(0,0,WIDTH,HEIGTH);
         Theme=chessboardTheme1;
@@ -50,6 +58,8 @@ public class ChessGameFrame extends JFrame {
         label.add(addLoadButton());
         label.add(addSaveButton());
         label.add(addSetBackButton());
+        Thread2 th=new Thread2();
+        th.run();
     }
 
 
@@ -162,7 +172,7 @@ public class ChessGameFrame extends JFrame {
     }
     //切换壁纸
     private JButton addSetBackButton() {
-        JButton button = new JButton("ChangeBackground");
+        JButton button = new JButton("Theme");
         button.setLocation(HEIGTH, HEIGTH / 10 + 360);
         button.setSize(200, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
@@ -173,5 +183,19 @@ public class ChessGameFrame extends JFrame {
                 }
         );
         return button;
+    }
+
+    public static void setBgm() {
+        try {
+            URL cb;
+            File f = new File("./music/bgm.wav");
+            cb = f.toURL();
+            AudioClip aau;
+            aau = Applet.newAudioClip(cb);
+            aau.loop();
+            System.out.println("bgm is run");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 }
