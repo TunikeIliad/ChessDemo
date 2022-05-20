@@ -58,8 +58,7 @@ public class ChessGameFrame extends JFrame {
         label.add(addLoadButton());
         label.add(addSaveButton());
         label.add(addSetBackButton());
-        Thread2 th=new Thread2();
-        th.run();
+        label.add(addSetBgmButton());
     }
 
 
@@ -85,6 +84,7 @@ public class ChessGameFrame extends JFrame {
         statusLabe=statusLabe2;
         return statusLabe;
     }
+
 
     public void setStatusLabeText(ChessColor cl) {
         if(cl==ChessColor.BLACK){
@@ -185,17 +185,16 @@ public class ChessGameFrame extends JFrame {
         return button;
     }
 
-    public static void setBgm() {
-        try {
-            URL cb;
-            File f = new File("./music/bgm.wav");
-            cb = f.toURL();
-            AudioClip aau;
-            aau = Applet.newAudioClip(cb);
-            aau.loop();
-            System.out.println("bgm is run");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+    private JButton addSetBgmButton() {
+        JButton button = new JButton("Bgm");
+        button.setLocation(HEIGTH, HEIGTH / 10 + 440);
+        button.setSize(200, 60);
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        button.addActionListener((e) ->
+                {
+                    setBgm();
+                }
+        );
+        return button;
     }
 }

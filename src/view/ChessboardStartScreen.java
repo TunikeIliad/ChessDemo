@@ -37,7 +37,7 @@ public class ChessboardStartScreen extends JFrame{
         label.add(button);
         label.setIcon(chessboardStartScreen);
         add(label);
-        Thread1 th=new Thread1();
+        Thread2 th=new Thread2();
         th.run();
 
         button.addActionListener(new ActionListener() {
@@ -64,11 +64,5 @@ public class ChessboardStartScreen extends JFrame{
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-    }
-}
-class Thread1 extends Thread{
-    public Thread1 (){}
-    public void run(){
-        setBgm();
     }
 }
