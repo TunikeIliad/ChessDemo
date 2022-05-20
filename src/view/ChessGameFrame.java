@@ -76,7 +76,7 @@ public class ChessGameFrame extends JFrame {
      * 在游戏面板中添加标签
      */
     private JLabel addLabel() {
-        JLabel statusLabe2 = new JLabel("行棋方是黑色方");
+        JLabel statusLabe2 = new JLabel("行棋方是白色方");
         statusLabe2.setLocation(HEIGTH, HEIGTH / 10+20);
         statusLabe2.setSize(200, 60);
         statusLabe2.setFont(new Font("Rockwell", Font.BOLD, 20));
@@ -108,7 +108,7 @@ public class ChessGameFrame extends JFrame {
                         chessboard.setVisible(false);
                         remove(chessboard);
                         label.add(addChessboard());
-                        setStatusLabeText(ChessColor.BLACK);
+                        setStatusLabeText(ChessColor.WHITE);
                 }
         );
         return button;

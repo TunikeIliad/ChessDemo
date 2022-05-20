@@ -3,10 +3,16 @@ package controller;
 
 import model.ChessColor;
 import model.ChessComponent;
+import sun.applet.AppletAudioClip;
 import view.Chessboard;
 
 import javax.swing.*;
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.*;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class ClickController {
     private final Chessboard chessboard;
@@ -35,6 +41,7 @@ public class ClickController {
                 chessboard.swapChessComponents(first, chessComponent);
                 chessboard.swapColor();
                 chessboard.frame.setStatusLabeText(chessboard.getCurrentColor());
+                setBgm();
                 first.setSelected(false);
                 first = null;
             }
@@ -58,5 +65,18 @@ public class ClickController {
     private boolean handleSecond(ChessComponent chessComponent) {
         return chessComponent.getChessColor() != chessboard.getCurrentColor() &&
                 first.canMoveTo(chessboard.getChessComponents(), chessComponent.getChessboardPoint());
+    }
+    public void setBgm(){
+        try{
+            URL cb;
+            File f=new File("./music/setChess.wav");
+            cb=f.toURL();
+            AudioClip aau=new AppletAudioClip(cb);
+            aau= Applet.newAudioClip(cb);
+            aau.play();
+            System.out.println("bgm is run") ;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 }
