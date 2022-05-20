@@ -10,6 +10,7 @@ import java.util.List;
 
 public class GameController {
     private Chessboard chessboard;
+    //test
 
     public GameController(Chessboard chessboard) {
         this.chessboard = chessboard;
