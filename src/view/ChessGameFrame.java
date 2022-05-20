@@ -13,7 +13,6 @@ import java.io.PrintStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static view.ChessboardStartScreen.setBgm;
 
 /**
  * 这个类表示游戏过程中的整个游戏界面，是一切的载体
@@ -31,6 +30,7 @@ public class ChessGameFrame extends JFrame {
     private ImageIcon Theme;
     private static ImageIcon chessboardTheme1 =new ImageIcon("./images/theme1.jpg");
     private static ImageIcon chessboardTheme2 =new ImageIcon("./images/theme2.jpg");
+    public AudioClip aau;
 
     public ChessGameFrame(int width, int height) {
         container=this.getContentPane();
@@ -58,7 +58,6 @@ public class ChessGameFrame extends JFrame {
         label.add(addLoadButton());
         label.add(addSaveButton());
         label.add(addSetBackButton());
-        label.add(addSetBgmButton());
     }
 
 
@@ -178,21 +177,8 @@ public class ChessGameFrame extends JFrame {
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         button.addActionListener((e) ->
                 {
-                    Theme=Theme== chessboardTheme1 ? chessboardTheme2 : chessboardTheme1;
+                    Theme = Theme == chessboardTheme1 ? chessboardTheme2 : chessboardTheme1;
                     label.setIcon(Theme);
-                }
-        );
-        return button;
-    }
-
-    private JButton addSetBgmButton() {
-        JButton button = new JButton("Bgm");
-        button.setLocation(HEIGTH, HEIGTH / 10 + 440);
-        button.setSize(200, 60);
-        button.setFont(new Font("Rockwell", Font.BOLD, 20));
-        button.addActionListener((e) ->
-                {
-                    setBgm();
                 }
         );
         return button;

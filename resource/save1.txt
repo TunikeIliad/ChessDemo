@@ -1,9 +1,9 @@
 RNBQKBNR
-PPP__P_P
+PP_P___P
 ______P_
-___PP___
+__P_PP__
+___pp_p_
 ________
-___p_p__
-ppp_p_pp
+ppp__p_p
 rnbqkbnr
 w
