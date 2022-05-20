@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cff068de-b8d7-4ddb-a13b-fdf9e29ab707" name="Changes" comment="完善了存档内容">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="cff068de-b8d7-4ddb-a13b-fdf9e29ab707" name="Changes" comment="再上传一次">
+      <change beforePath="$PROJECT_DIR$/src/model/PawnChessComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/PawnChessComponent.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +114,6 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
@@ -202,7 +200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653036638663</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="再上传一次">
+      <created>1653040374923</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1653040374923</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -295,7 +300,8 @@
     <MESSAGE value="修复了壁纸的问题" />
     <MESSAGE value="可以自由切换主题" />
     <MESSAGE value="完善了存档内容" />
-    <option name="LAST_COMMIT_MESSAGE" value="完善了存档内容" />
+    <MESSAGE value="再上传一次" />
+    <option name="LAST_COMMIT_MESSAGE" value="再上传一次" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ChessDemo$Unnamed.ic" NAME="Unnamed Coverage Results" MODIFIED="1652687247541" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

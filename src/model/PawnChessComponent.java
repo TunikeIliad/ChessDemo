@@ -108,13 +108,14 @@ public class PawnChessComponent extends ChessComponent{
                     view.ChessboardPoint p = getChessboardPoint().offset(1, i);
                     ChessComponent c = chessComponents[p.getX()][p.getY()];
                     if(i == 0){
-                        if(c.getChessColor() == ChessColor.NONE)
+                        if(c.getChessColor() == ChessColor.NONE){
                             way.add(c);
-                        if(getChessboardPoint().getX() == 1){
-                            view.ChessboardPoint q = p.offset(1,0);
-                            ChessComponent d = chessComponents[q.getX()][q.getY()];
-                            if(d.getChessColor() == ChessColor.NONE)
-                                way.add(d);
+                            if(getChessboardPoint().getX() == 1){
+                                view.ChessboardPoint q = p.offset(1,0);
+                                ChessComponent d = chessComponents[q.getX()][q.getY()];
+                                if(d.getChessColor() == ChessColor.NONE)
+                                    way.add(d);
+                            }
                         }
                     }
                     else{
@@ -131,13 +132,14 @@ public class PawnChessComponent extends ChessComponent{
                     view.ChessboardPoint p = getChessboardPoint().offset(-1, i);
                     ChessComponent c = chessComponents[p.getX()][p.getY()];
                     if(i == 0){
-                        if(c.getChessColor() == ChessColor.NONE)
+                        if(c.getChessColor() == ChessColor.NONE){
                             way.add(c);
-                        if(getChessboardPoint().getX() == 6){
-                            view.ChessboardPoint q = p.offset(-1,0);
-                            ChessComponent d = chessComponents[q.getX()][q.getY()];
-                            if(d.getChessColor() == ChessColor.NONE)
-                                way.add(d);
+                            if(getChessboardPoint().getX() == 6){
+                                view.ChessboardPoint q = p.offset(-1,0);
+                                ChessComponent d = chessComponents[q.getX()][q.getY()];
+                                if(d.getChessColor() == ChessColor.NONE)
+                                    way.add(d);
+                            }
                         }
                     }
                     else{
