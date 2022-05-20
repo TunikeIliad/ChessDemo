@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cd1f5d18-243d-4722-b4d0-8241b5bc2d93" name="Default Changelist" comment="可以自由切换主题">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/save1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resource/save1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/save3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resource/nonePlayer.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/save4.doc" beforeDir="false" afterPath="$PROJECT_DIR$/resource/wrongTXT.doc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/wrongChessName.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resource/wrongChessName.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/wrongChessboardSize.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resource/wrongChessboard.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ChessGameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ChessGameFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/Chessboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Chessboard.java" afterDir="false" />
-    </list>
+    <list default="true" id="cd1f5d18-243d-4722-b4d0-8241b5bc2d93" name="Default Changelist" comment="完善了存档内容" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -202,7 +192,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652983258555</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="完善了存档内容">
+      <created>1653036638663</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1653036638663</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -283,7 +280,8 @@
     <MESSAGE value="增加了一个错误存档的报错，正在修正壁纸的问题" />
     <MESSAGE value="修复了壁纸的问题" />
     <MESSAGE value="可以自由切换主题" />
-    <option name="LAST_COMMIT_MESSAGE" value="可以自由切换主题" />
+    <MESSAGE value="完善了存档内容" />
+    <option name="LAST_COMMIT_MESSAGE" value="完善了存档内容" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ChessDemo$Unnamed.ic" NAME="Unnamed Coverage Results" MODIFIED="1652967733674" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
