@@ -20,6 +20,17 @@ public class ChessboardPoint {
         return y;
     }
 
+    public ChessboardPoint offset(int x, int y){
+        int xo = this.x + x;
+        int yo = this.y + y;
+        ChessboardPoint p = new ChessboardPoint(xo,yo);
+        if(xo>=0 && xo<=7 && yo>=0 && yo<=7)
+            return p;
+        else
+            return null;
+
+    }
+
     @Override
     public String toString() {
         return "("+x + ","+y+") " + "on the chessboard is clicked!";

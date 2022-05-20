@@ -8,6 +8,9 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class KingChessComponent extends ChessComponent{
     private static Image KING_WHITE;
     private static Image KING_BLACK;
@@ -66,6 +69,27 @@ public class KingChessComponent extends ChessComponent{
         return true;
     }
 
+
+    @Override
+    public List<ChessComponent> getCanMovePoints(ChessComponent[][] chessComponents){
+        ArrayList<ChessComponent> way = new ArrayList<>();
+        for(int i = -1; i < 2; i++){
+            for(int j = -1; j < 2; j++){
+                view.ChessboardPoint p = getChessboardPoint().offset(i,j);
+                if(p != null){
+                    ChessComponent c = chessComponents[p.getX()][p.getY()];
+                    if(c.getChessColor() != getChessColor()){
+                        way.add(c);
+                    }
+
+                }
+            }
+        }
+
+        return way;
+    }
+
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -73,6 +97,10 @@ public class KingChessComponent extends ChessComponent{
         g.drawImage(kingImage, 0, 0, getWidth() , getHeight(), this);
         g.setColor(Color.BLACK);
         if (isSelected()) { // Highlights the model if selected.
+            g.setColor(Color.GREEN);
+            g.drawOval(0, 0, getWidth() , getHeight());
+        }
+        if(isAttacked()){
             g.setColor(Color.RED);
             g.drawOval(0, 0, getWidth() , getHeight());
         }

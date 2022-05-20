@@ -7,6 +7,8 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BishopChessComponent extends ChessComponent{
     private static Image BISHOP_WHITE;
@@ -60,6 +62,37 @@ public class BishopChessComponent extends ChessComponent{
         }else{return false;}
         return true;
     }
+    @Override
+    public List<ChessComponent> getCanMovePoints(ChessComponent[][] chessComponents){
+        ArrayList<ChessComponent> way = new ArrayList<>();
+        for(int i = -1; i < 2; i++){
+            for(int j = -1; j < 2; j++){
+                if(i == 0) i++;
+                if(j == 0) j++;
+                int a = i; int b = j;
+                while(getChessboardPoint().offset(i,j) != null){
+                    ChessboardPoint p = getChessboardPoint().offset(i, j);
+                    ChessComponent c = chessComponents[p.getX()][p.getY()];
+                    if(c.getChessColor() == ChessColor.NONE){
+                        way.add(c);
+                        i += a;j += b;
+                    }
+                    else if(c.getChessColor() == getChessColor()){
+                        i = a; j = b;
+                        break;
+                    }
+                    else{
+                        way.add(c);
+                        i = a; j = b;
+                        break;
+                    }
+                }
+                i = a; j = b;
+            }
+        }
+        return way;
+    }
+
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -68,6 +101,10 @@ public class BishopChessComponent extends ChessComponent{
         g.drawImage(bishopImage, 0, 0, getWidth() , getHeight(), this);
         g.setColor(Color.BLACK);
         if (isSelected()) { // Highlights the model if selected.
+            g.setColor(Color.GREEN);
+            g.drawOval(0, 0, getWidth() , getHeight());
+        }
+        if(isAttacked()){
             g.setColor(Color.RED);
             g.drawOval(0, 0, getWidth() , getHeight());
         }

@@ -13,6 +13,7 @@ import java.awt.*;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class ClickController {
     private final Chessboard chessboard;
@@ -29,6 +30,7 @@ public class ClickController {
                 chessComponent.setSelected(true);
                 first = chessComponent;
                 first.repaint();
+                paintMovePoint(first);
             }
         } else {
             if (first == chessComponent) { // 再次点击取消选取
@@ -36,8 +38,10 @@ public class ClickController {
                 ChessComponent recordFirst = first;
                 first = null;
                 recordFirst.repaint();
+                removeMovePoint(recordFirst);
             } else if (handleSecond(chessComponent)) {
                 //repaint in swap chess method.
+                removeMovePoint(first);
                 chessboard.swapChessComponents(first, chessComponent);
                 chessboard.swapColor();
                 chessboard.frame.setStatusLabeText(chessboard.getCurrentColor());
@@ -65,6 +69,28 @@ public class ClickController {
     private boolean handleSecond(ChessComponent chessComponent) {
         return chessComponent.getChessColor() != chessboard.getCurrentColor() &&
                 first.canMoveTo(chessboard.getChessComponents(), chessComponent.getChessboardPoint());
+    }
+
+    private void paintMovePoint(ChessComponent chessComponent){
+        ArrayList<ChessComponent> c = new ArrayList<>(chessComponent.getCanMovePoints(chessboard.getChessComponents()));
+        if(c.size() != 0){
+            for(int i = 0; i < c.size(); i++){
+                c.get(i).setAttacked(true);
+                c.get(i).repaint();
+            }
+        }
+
+    }
+
+    private void removeMovePoint(ChessComponent chessComponent){
+        ArrayList<ChessComponent> c = new ArrayList<>(chessComponent.getCanMovePoints(chessboard.getChessComponents()));
+        if(c.size() != 0){
+            for(int i = 0; i < c.size(); i++){
+                c.get(i).setAttacked(false);
+                c.get(i).repaint();
+            }
+        }
+
     }
     public void setBgm(){
         try{

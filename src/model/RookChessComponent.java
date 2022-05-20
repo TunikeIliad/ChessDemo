@@ -7,6 +7,8 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 这个类表示国际象棋里面的车
@@ -101,6 +103,52 @@ public class RookChessComponent extends ChessComponent {
         return true;
     }
 
+    @Override
+    public List<ChessComponent> getCanMovePoints(ChessComponent[][] chessComponents){
+        ArrayList<ChessComponent> way = new ArrayList<>();
+        int s = 0;
+        for(int i = -1; i < 2; i += 2){
+            int a = i;
+            while(getChessboardPoint().offset(s,i) != null) {
+                view.ChessboardPoint p = getChessboardPoint().offset(s, i);
+                ChessComponent c = chessComponents[p.getX()][p.getY()];
+                if(c.getChessColor() == ChessColor.NONE){
+                    way.add(c);
+                    i += a;
+                }
+                else if(c.getChessColor() == getChessColor()){
+                    i = a;
+                    break;
+                }
+                else{
+                    way.add(c);
+                    i = a;
+                    break;
+                }
+            }
+            i = a;
+            while(getChessboardPoint().offset(i,s) != null) {
+                ChessboardPoint p = getChessboardPoint().offset(i, s);
+                ChessComponent c = chessComponents[p.getX()][p.getY()];
+                if(c.getChessColor() == ChessColor.NONE){
+                    way.add(c);
+                    i += a;
+                }
+                else if(c.getChessColor() == getChessColor()){
+                    i = a;
+                    break;
+                }
+                else{
+                    way.add(c);
+                    i = a;
+                    break;
+                }
+            }
+            i = a;
+        }
+        return way;
+    }
+
     /**
      * 注意这个方法，每当窗体受到了形状的变化，或者是通知要进行绘图的时候，就会调用这个方法进行画图。
      *
@@ -113,6 +161,10 @@ public class RookChessComponent extends ChessComponent {
         g.drawImage(rookImage, 0, 0, getWidth() , getHeight(), this);
         g.setColor(Color.BLACK);
         if (isSelected()) { // Highlights the model if selected.
+            g.setColor(Color.GREEN);
+            g.drawOval(0, 0, getWidth() , getHeight());
+        }
+        if(isAttacked()){
             g.setColor(Color.RED);
             g.drawOval(0, 0, getWidth() , getHeight());
         }

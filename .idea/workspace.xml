@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cd1f5d18-243d-4722-b4d0-8241b5bc2d93" name="Default Changelist" comment="完善了存档内容" />
+    <list default="true" id="cd1f5d18-243d-4722-b4d0-8241b5bc2d93" name="Default Changelist" comment="完善了存档内容">
+      <change beforePath="$PROJECT_DIR$/src/controller/ClickController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ClickController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/BishopChessComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/BishopChessComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ChessComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ChessComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/EmptySlotComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/EmptySlotComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/KingChessComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/KingChessComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/KnightChessComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/KnightChessComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/PawnChessComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/PawnChessComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/QueenChessComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/QueenChessComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/RookChessComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/RookChessComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ChessboardPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ChessboardPoint.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
