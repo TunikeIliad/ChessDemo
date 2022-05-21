@@ -263,6 +263,8 @@ public class Chessboard extends JComponent {
         for(int j=0;j<8;j++){
             for(int i=0;i<8;i++){
                 switch(chessData.get(j).charAt(i)){
+                    case '_':
+                        break;
                     case 'K':
                         initKingOnBoard(j, i, ChessColor.BLACK);chessComponents[j][i].repaint();
                         break;

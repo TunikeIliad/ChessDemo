@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cff068de-b8d7-4ddb-a13b-fdf9e29ab707" name="Changes" comment="再上传一次" />
+    <list default="true" id="cff068de-b8d7-4ddb-a13b-fdf9e29ab707" name="Changes" comment="changshiyixia">
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/save1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resource/save1.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -205,7 +209,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653040374923</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="changshiyixia">
+      <created>1653044975345</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1653044975345</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -299,10 +310,12 @@
     <MESSAGE value="可以自由切换主题" />
     <MESSAGE value="完善了存档内容" />
     <MESSAGE value="再上传一次" />
-    <option name="LAST_COMMIT_MESSAGE" value="再上传一次" />
+    <MESSAGE value="changshiyixia" />
+    <option name="LAST_COMMIT_MESSAGE" value="changshiyixia" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ChessDemo$Unnamed.ic" NAME="Unnamed Coverage Results" MODIFIED="1652687247541" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ChessDemoTest$Unnamed.ic" NAME="Unnamed Coverage Results" MODIFIED="1653044922483" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/images/bishop-black.png">
