@@ -77,13 +77,15 @@ public class ChessboardStartScreen extends JFrame{
                         ChessGameFrame mainFrame = new ChessGameFrame(1000, 760);
                         mainFrame.setVisible(true);
                         mainFrame.chessboard.setFrame(mainFrame);
-                        mainFrame.user = user1;
+                        mainFrame.setUser(user1);
+                        mainFrame.setUserText(user1) ;
                     }
                     else if(jtf1.getText().equals(user2.userName)&&jpf1.getText().equals(user2.password)){
                         ChessGameFrame mainFrame = new ChessGameFrame(1000, 760);
                         mainFrame.setVisible(true);
                         mainFrame.chessboard.setFrame(mainFrame);
-                        mainFrame.user = user2;
+                        mainFrame.setUser(user2);
+                        mainFrame.setUserText(user2) ;
                     }
                     else{
                         JFrame error = new JFrame("用户名或密码错误");

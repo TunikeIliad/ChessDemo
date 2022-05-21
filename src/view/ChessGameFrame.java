@@ -32,7 +32,9 @@ public class ChessGameFrame extends JFrame {
     private static ImageIcon chessboardTheme1 =new ImageIcon("./images/theme1.jpg");
     private static ImageIcon chessboardTheme2 =new ImageIcon("./images/theme2.jpg");
     public AudioClip aau;
-    public User user;
+    public User user=new User();
+    JLabel userLabel = new JLabel();
+    JLabel userRankLabel = new JLabel();
 
     public ChessGameFrame(int width, int height) {
         container=this.getContentPane();
@@ -61,6 +63,8 @@ public class ChessGameFrame extends JFrame {
         label.add(addSaveButton());
         label.add(addSetBackButton());
         label.add(addRetractButton());
+        label.add(addUserLabel());
+        label.add(userRankLabel);
     }
 
 
@@ -243,5 +247,29 @@ public class ChessGameFrame extends JFrame {
                 }
         );
         return button;
+    }
+
+    //用户信息显示
+    private JLabel addUserLabel() {
+        JLabel userLabel1 = new JLabel("用户名：");
+        System.out.println(user.userName);
+        userLabel1.setLocation(HEIGTH, HEIGTH / 10+340);
+        userLabel1.setSize(100, 100);
+        userLabel1.setFont(new Font("Rockwell", Font.BOLD, 20));
+        userLabel=userLabel1;
+        JLabel userLabel2 = new JLabel("用户名：");
+        userLabel2.setLocation(HEIGTH, HEIGTH / 10+370);
+        userLabel2.setSize(400, 100);
+        userLabel2.setFont(new Font("Rockwell", Font.BOLD, 20));
+        userRankLabel=userLabel2;
+        return userLabel1;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    public void setUserText(User user){
+        userLabel.setText("用户名："+user .userName) ;
+        userRankLabel.setText("用户排行："+user.rank);
     }
 }
