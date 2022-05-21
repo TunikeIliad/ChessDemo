@@ -3,6 +3,8 @@ package model;
 public class User {
     public String userName;
     public String password;
+    public int rank;
+    public int score;
 
     public User(String userName,String password){
         this.userName=userName;

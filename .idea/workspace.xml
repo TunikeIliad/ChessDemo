@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cff068de-b8d7-4ddb-a13b-fdf9e29ab707" name="Changes" comment="修正了存档">
-      <change afterPath="$PROJECT_DIR$/src/model/User.java" afterDir="false" />
+    <list default="true" id="cff068de-b8d7-4ddb-a13b-fdf9e29ab707" name="Changes" comment="新增了一个假的登录界面">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/save1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resource/save1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ChessGameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ChessGameFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/Chessboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Chessboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/ChessboardStartScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ChessboardStartScreen.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -234,7 +231,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653116795817</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="新增了一个假的登录界面">
+      <created>1653120910502</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1653120910502</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -330,7 +334,8 @@
     <MESSAGE value="再上传一次" />
     <MESSAGE value="changshiyixia" />
     <MESSAGE value="修正了存档" />
-    <option name="LAST_COMMIT_MESSAGE" value="修正了存档" />
+    <MESSAGE value="新增了一个假的登录界面" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增了一个假的登录界面" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ChessDemo$Unnamed.ic" NAME="Unnamed Coverage Results" MODIFIED="1652687247541" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

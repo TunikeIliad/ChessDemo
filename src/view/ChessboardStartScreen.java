@@ -41,6 +41,8 @@ public class ChessboardStartScreen extends JFrame{
         label.setIcon(chessboardStartScreen);
         add(label);
         setBgm();
+        User user1=new User("1","1");
+        User user2=new User("2","2");
 
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -71,9 +73,32 @@ public class ChessboardStartScreen extends JFrame{
 
                 button1.addActionListener(r-> {
                     login.setVisible(false);
-                    ChessGameFrame mainFrame = new ChessGameFrame(1000, 760);
-                    mainFrame.setVisible(true);
-                    mainFrame.chessboard.setFrame(mainFrame);
+                    if(jtf1.getText().equals(user1.userName)&&jpf1.getText().equals(user1.password)){
+                        ChessGameFrame mainFrame = new ChessGameFrame(1000, 760);
+                        mainFrame.setVisible(true);
+                        mainFrame.chessboard.setFrame(mainFrame);
+                        mainFrame.user = user1;
+                    }
+                    else if(jtf1.getText().equals(user2.userName)&&jpf1.getText().equals(user2.password)){
+                        ChessGameFrame mainFrame = new ChessGameFrame(1000, 760);
+                        mainFrame.setVisible(true);
+                        mainFrame.chessboard.setFrame(mainFrame);
+                        mainFrame.user = user2;
+                    }
+                    else{
+                        JFrame error = new JFrame("用户名或密码错误");
+                        error.setLayout(null) ;
+                        error.setLocationRelativeTo(null);
+                        error.setVisible(true);
+                        error.setSize(300, 220);
+                        JButton button2=new JButton("返回主界面");
+                        button2.setBounds(80, 100, 70, 50);
+                        error.add(button2);
+                        button2.addActionListener(m-> {
+                            login.setVisible(true);
+                            error.setVisible(false);
+                        });
+                    }
                 });
             }
         });
