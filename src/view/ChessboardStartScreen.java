@@ -1,5 +1,7 @@
 package view;
 
+import model.User;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -19,6 +21,7 @@ public class ChessboardStartScreen extends JFrame{
     private int WIDTH;
     private int HEIGTH;
     public AudioClip aau;
+    public User user;
 
     public ChessboardStartScreen() {
         setTitle("2022 CS102A Project Demo");
@@ -42,9 +45,36 @@ public class ChessboardStartScreen extends JFrame{
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 setVisible(false); //Set the window to visible
-                ChessGameFrame mainFrame = new ChessGameFrame(1000, 760);
-                mainFrame.setVisible(true);
-                mainFrame.chessboard.setFrame(mainFrame);
+                JFrame login = new JFrame("用户登录");
+                login.setLayout(null) ;
+                login.setLocationRelativeTo(null);
+                login.setSize(300, 220);
+                JLabel jl1 = new JLabel("用户名：");
+                final JTextField jtf1 = new JTextField();
+                JLabel jl2 = new JLabel("密码:");
+                final JPasswordField jpf1 = new JPasswordField();
+                jpf1.setEchoChar('*');
+                JButton button1=new JButton("login");
+
+                jl1.setBounds(10, 20, 90, 30);
+                jtf1.setBounds(60, 20, 210, 30);
+                jl2.setBounds(25, 60, 90, 30);
+                jpf1.setBounds(60, 60, 210, 30);
+                button1.setBounds(80, 100, 70, 50);
+
+                login.add(jl1);
+                login.add(jtf1);
+                login.add(jl2);
+                login.add(jpf1);
+                login.add(button1);
+                login.setVisible(true);
+
+                button1.addActionListener(r-> {
+                    login.setVisible(false);
+                    ChessGameFrame mainFrame = new ChessGameFrame(1000, 760);
+                    mainFrame.setVisible(true);
+                    mainFrame.chessboard.setFrame(mainFrame);
+                });
             }
         });
         setBounds(30,20,WIDTH,HEIGTH);

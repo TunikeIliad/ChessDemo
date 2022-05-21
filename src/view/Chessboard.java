@@ -40,18 +40,6 @@ public class Chessboard extends JComponent {
     private List<String> boardList = new ArrayList<>();
 
     //各棋子
-    /*private int rook=0;
-    private int knight=0;
-    private int bishop=0;
-    private int pawn=0;
-    private int king=0;
-    private int queen=0;
-    private ChessComponent Rooks[]=new ChessComponent[4];
-    private ChessComponent Knights[]=new ChessComponent[4];
-    private ChessComponent Bishops[]=new ChessComponent[4];
-    private ChessComponent Pawns[]=new ChessComponent[16];
-    private ChessComponent Kings[]=new ChessComponent[2];
-    private ChessComponent Queens[]=new ChessComponent[2];*/
 
 
 

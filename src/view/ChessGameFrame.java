@@ -2,6 +2,7 @@ package view;
 
 import controller.GameController;
 import model.ChessColor;
+import model.User;
 
 import javax.swing.*;
 import java.applet.Applet;
@@ -31,6 +32,7 @@ public class ChessGameFrame extends JFrame {
     private static ImageIcon chessboardTheme1 =new ImageIcon("./images/theme1.jpg");
     private static ImageIcon chessboardTheme2 =new ImageIcon("./images/theme2.jpg");
     public AudioClip aau;
+    public User user;
 
     public ChessGameFrame(int width, int height) {
         container=this.getContentPane();
