@@ -244,11 +244,21 @@ public class ChessGameFrame extends JFrame {
                     if(!(chessboard.retract(1))){
                         JOptionPane.showMessageDialog(null,"You can't retract", "Message", JOptionPane.PLAIN_MESSAGE);
                     }
+                    setStatusLabeText(chessboard.getCurrentColor());
                 }
         );
         return button;
     }
-
+    //胜利
+    public void showVictory(){
+        if(chessboard.getWinner() == ChessColor.BLACK)
+            JOptionPane.showMessageDialog(null,"黑方获胜！","Congratulations!", JOptionPane.PLAIN_MESSAGE);
+        else JOptionPane.showMessageDialog(null,"白方获胜！","Congratulations!", JOptionPane.PLAIN_MESSAGE);
+        chessboard.setVisible(false);
+        remove(chessboard);
+        label.add(addChessboard());
+        setStatusLabeText(ChessColor.WHITE);
+    }
     //用户信息显示
     private JLabel addUserLabel() {
         JLabel userLabel1 = new JLabel("用户名：");

@@ -3,6 +3,7 @@ package controller;
 
 import model.ChessColor;
 import model.ChessComponent;
+import model.KingChessComponent;
 import sun.applet.AppletAudioClip;
 import view.Chessboard;
 
@@ -42,6 +43,7 @@ public class ClickController {
             } else if (handleSecond(chessComponent)) {
                 //repaint in swap chess method.
                 removeMovePoint(first);
+                ChessComponent chess1 = first, chess2 = chessComponent;
                 chessboard.swapChessComponents(first, chessComponent);
                 chessboard.swapColor();
                 chessboard.frame.setStatusLabeText(chessboard.getCurrentColor());
@@ -49,6 +51,20 @@ public class ClickController {
                 first.setSelected(false);
                 first = null;
                 chessboard.saveBoard(chessboard.saveGame());
+                chessboard.showKingAttacked();
+                if(chess2 instanceof KingChessComponent){
+                    chessboard.setWinner(chess1.getChessColor());chessboard.setCheckmate(true);
+                    chessboard.frame.showVictory();
+                }
+                if(chessboard.getBlackKingAttackedAlert() && chessboard.checkmate(ChessColor.BLACK)){
+                    chessboard.setWinner(ChessColor.WHITE);chessboard.setCheckmate(true);
+                    chessboard.frame.showVictory();
+                }
+                if(chessboard.getWhiteKingAttackedAlert() && chessboard.checkmate(ChessColor.WHITE)){
+                    chessboard.setWinner(ChessColor.BLACK);chessboard.setCheckmate(true);
+                    chessboard.frame.showVictory();
+                }
+
             }
         }
     }

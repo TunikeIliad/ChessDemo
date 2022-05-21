@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,6 +43,9 @@ public abstract class ChessComponent extends JComponent {
     private boolean selected;
     private boolean attacked;
     protected Chessboard chessboard;//王不吃王
+    protected List<ChessComponent> attackWay = new ArrayList<>();//攻击范围
+    protected List<ChessComponent> beingAttacked = new ArrayList<>();//会被谁攻击
+    protected boolean tryToAttackKing = false;
     protected char name;
 
     protected ChessComponent(ChessboardPoint chessboardPoint, Point location, ChessColor chessColor, ClickController clickController, int size) {
@@ -79,6 +83,51 @@ public abstract class ChessComponent extends JComponent {
     }
     public void setChessboard(Chessboard chessboard){this.chessboard = chessboard;}//王不吃王
 
+    public void setAttackWay(List<ChessComponent> chessComponentList){
+        attackWay.clear();
+        attackWay.addAll(chessComponentList);
+        //System.out.println(attackWay);
+    }
+    public List<ChessComponent> getAttackWay(){return attackWay;}
+
+    public void setBeingAttacked(List<ChessComponent> chessComponentList) {
+        beingAttacked.clear();
+        beingAttacked.addAll(chessComponentList);
+    }
+    public List<ChessComponent> getBeingAttacked(){return beingAttacked;}
+
+    public boolean checkAttackKing(){
+        boolean b = false;
+        for(int i = 0; i < attackWay.size(); i++){
+            if(attackWay.get(i) instanceof KingChessComponent){
+                b = true;
+            }
+        }
+        if(b){
+            if(chessColor == ChessColor.BLACK) chessboard.setWhiteKiller(this);
+            if(chessColor == ChessColor.WHITE) chessboard.setBlackKiller(this);
+            tryToAttackKing = true; return true;
+        }
+        else{
+            tryToAttackKing = false; return false;
+        }
+    }
+
+    public List<ChessComponent> whoKillMe(ChessComponent[][] chessComponents){
+        List<ChessComponent> meKiller = new ArrayList<>();
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                for(ChessComponent c : chessComponents[i][j].getAttackWay()){
+                    if(c.getChessboardPoint().toString().equals(chessboardPoint.toString())){
+                        meKiller.add(chessComponents[i][j]);
+                        break;
+                        //System.out.printf(String.valueOf(name));System.out.println(c);
+                    }
+                }
+            }
+        }
+        return meKiller;
+    }
     /**
      * @param another 主要用于和另外一个棋子交换位置
      *                <br>

@@ -96,6 +96,14 @@ public class KingChessComponent extends ChessComponent{
 //        g.drawImage(rookImage, 0, 0, getWidth() - 13, getHeight() - 20, this);
         g.drawImage(kingImage, 0, 0, getWidth() , getHeight(), this);
         g.setColor(Color.BLACK);
+        if(chessboard.getBlackKingAttackedAlert() && chessColor == ChessColor.BLACK){
+            g.setColor(Color.RED);
+            g.drawOval(0, 0, getWidth() , getHeight());
+        }
+        if(chessboard.getWhiteKingAttackedAlert() && chessColor == ChessColor.WHITE){
+            g.setColor(Color.RED);
+            g.drawOval(0, 0, getWidth() , getHeight());
+        }
         if (isSelected()) { // Highlights the model if selected.
             g.setColor(Color.GREEN);
             g.drawOval(0, 0, getWidth() , getHeight());

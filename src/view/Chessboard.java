@@ -34,12 +34,18 @@ public class Chessboard extends JComponent {
     //all chessComponents in this chessboard are shared only one model controller
     private final ClickController clickController = new ClickController(this);
     private final int CHESS_SIZE;
+    //判断王不吃王
     private ChessboardPoint blackKingPoint = new ChessboardPoint(0,CHESSBOARD_SIZE - 4),
             whiteKingPoint = new ChessboardPoint(CHESSBOARD_SIZE - 1,CHESSBOARD_SIZE - 4);
-    //存储棋盘
+    //王被将军的警告
+    private boolean blackKingAttackedAlert = false;
+    private boolean whiteKingAttackedAlert = false;
+    private List<ChessComponent> blackKiller = new ArrayList<>();//吃黑王的棋子
+    private List<ChessComponent> whiteKiller = new ArrayList<>();//吃白王的棋子
+    private boolean checkmate = false;
+    private ChessColor winner;
+    //悔棋时的存储棋盘
     private List<String> boardList = new ArrayList<>();
-
-    //各棋子
 
 
 
@@ -65,6 +71,24 @@ public class Chessboard extends JComponent {
     public ChessColor getCurrentColor() {
         return currentColor;
     }
+    public void setBlackKingAttackedAlert(boolean b){
+        blackKingAttackedAlert = b;
+    }
+    public void setWhiteKingAttackedAlert(boolean b){
+        whiteKingAttackedAlert = b;
+    }
+    public boolean getBlackKingAttackedAlert(){return blackKingAttackedAlert;}
+    public boolean getWhiteKingAttackedAlert(){return whiteKingAttackedAlert;}
+    public void setBlackKiller(ChessComponent chessComponent){
+        blackKiller.add(chessComponent);
+    }
+    public void setWhiteKiller(ChessComponent chessComponent){
+        whiteKiller.add(chessComponent);
+    }
+    public void setWinner(ChessColor winner){this.winner = winner;}
+    public ChessColor getWinner(){return winner;}
+    public void setCheckmate(boolean checkmate){this.checkmate = checkmate;}
+    public boolean getCheckmate(){return checkmate;}
 
     public void putChessOnBoard(ChessComponent chessComponent) {
         int row = chessComponent.getChessboardPoint().getX(), col = chessComponent.getChessboardPoint().getY();
@@ -107,9 +131,33 @@ public class Chessboard extends JComponent {
             if(chess1.getChessColor() == ChessColor.BLACK) setBlackKingPoint(chess1.getChessboardPoint());
             else setWhiteKingPoint(chess1.getChessboardPoint());
         }
-        //每一次行棋，各棋子存一次棋盘
+        //每一次行棋，各棋子存一次棋盘,存一次攻击路径，判断一次是否将军,更新一次将军列表
+        blackKiller.clear();whiteKiller.clear();
+        boolean b = false, w = false;
         for(ChessComponent[] c1 : chessComponents){
-            for(ChessComponent c : c1) c.setChessboard(this);
+            for(ChessComponent c : c1) {
+                c.setChessboard(this);
+                if(!(c instanceof EmptySlotComponent)){
+                    if(!(c instanceof PawnChessComponent)) c.setAttackWay(c.getCanMovePoints(chessComponents));
+                    else c.setAttackWay(((PawnChessComponent) c).getAttackPoints(chessComponents));
+                }
+                if(c.checkAttackKing()){
+                    if(c.getChessColor() == ChessColor.BLACK){
+                        w = true;
+                    }
+                    else if(c.getChessColor() == ChessColor.WHITE){
+                        b = true;
+                    }
+                }
+            }
+        }
+        blackKingAttackedAlert = b; whiteKingAttackedAlert = w;
+        System.out.println(blackKiller);
+        System.out.println(whiteKiller);
+        for(ChessComponent[] c1 : chessComponents){
+            for(ChessComponent c : c1) {
+                c.whoKillMe(chessComponents);
+            }
         }
     }
 
@@ -168,8 +216,7 @@ public class Chessboard extends JComponent {
         initPawnOnBoard(CHESSBOARD_SIZE - 2,6,ChessColor.WHITE);
         initPawnOnBoard(CHESSBOARD_SIZE - 2,7,ChessColor.WHITE);
         boardList.add(saveGame());
-        System.out.println(saveGame());
-        //System.out.println(chessComponents[0][0]);
+
     }
     private void initRookOnBoard(int row, int col, ChessColor color) {
         ChessComponent chessComponent = new RookChessComponent(new ChessboardPoint(row, col), calculatePoint(row, col), color, clickController, CHESS_SIZE);
@@ -327,16 +374,16 @@ public class Chessboard extends JComponent {
 
     //悔棋时转换棋盘格式
     public boolean retract(int steps){
-        if(boardList.size() >= steps*2+1){
-            List<String> c = boardList.subList(boardList.size()-steps*2, boardList.size());
-            System.out.println(c);
+        if(boardList.size() >= steps+1){
+            List<String> c = boardList.subList(boardList.size()-steps, boardList.size());
+            //System.out.println(c);
             boardList.removeAll(c);
             StringBuilder str = new StringBuilder(boardList.get(boardList.size()-1).replaceAll("\n", ""));
             List<String> s = new ArrayList<>();
             for(int i = 0; i < 64; i+=8){
                 s.add(str.substring(i,i+8));
             }
-            s.add(str.substring(64));System.out.println(s);
+            s.add(str.substring(64));//System.out.println(s);
             initiateEmptyChessboard();
             //loadGame(s);
             for(int j=0;j<8;j++){
@@ -379,6 +426,12 @@ public class Chessboard extends JComponent {
                             initPawnOnBoard(j, i, ChessColor.WHITE);chessComponents[j][i].repaint();
                             break;
                     }
+                    if(s.get(8).equals("w")){
+                        currentColor=ChessColor.WHITE;
+                    }
+                    else if(s.get(8).equals("b")){
+                        currentColor=ChessColor.BLACK;
+                    }
                 }
             }
             return true;
@@ -386,7 +439,58 @@ public class Chessboard extends JComponent {
         else
             return false;
     }
+    //王被攻击报警
+    public void showKingAttacked(){
+        chessComponents[blackKingPoint.getX()][blackKingPoint.getY()].repaint();
+        chessComponents[whiteKingPoint.getX()][whiteKingPoint.getY()].repaint();
+    }
 
+    //王的将死
+    public boolean checkmate(ChessColor chessColor){
+        if(chessColor == ChessColor.BLACK){
+            return checkNonMoveWay(blackKingPoint);
+        }
+        else
+            return checkNonMoveWay(whiteKingPoint);
+    }
+    //王无路可走(且将死)
+    public boolean checkNonMoveWay(ChessboardPoint kingPoint){
+        int count = 0;
+        boolean checkKingKiller = true, checkKingMove = true;
+        List<ChessComponent> kingKiller = new ArrayList<>();
+        ChessComponent king = chessComponents[kingPoint.getX()][kingPoint.getY()];
+        List<ChessComponent> kingMove = new ArrayList<>(king.getCanMovePoints(chessComponents));
+        if(king.getChessColor() == ChessColor.BLACK) kingKiller.addAll(blackKiller);
+        else if(king.getChessColor() == ChessColor.WHITE) kingKiller.addAll(whiteKiller);
+        //看看王可不可以逃
+        ChessColor color = king.getChessColor();
+        for(ChessComponent km : kingMove){
+            boolean check1 = false;
+            System.out.println(km.getChessboardPoint());
+            for(ChessComponent km1 : km.whoKillMe(chessComponents)){
+                System.out.println(km1);
+                //如果躲开还是会被将军
+                if(km1.getChessColor() != color && !(km1 instanceof KingChessComponent)){
+                    check1 = true;
+                    break;
+                }
+            }
+            if(check1)count++;//说明此点会被将军，不能走
+            System.out.println(count);
+        }
+        if(count == kingMove.size()){
+            checkKingMove = false;
+        }
+        //一个子将军看能不能吃
+        if(kingKiller.size() == 1){
+            if(kingKiller.get(0).whoKillMe(chessComponents).size() != 0){
+                checkKingKiller =false;
+            }
+        }
+        //多个子将军肯定是来不及吃掉的，所以checkKingKiller永远是true
+        System.out.println(checkKingKiller);System.out.println(checkKingMove);
+        return (checkKingKiller && !checkKingMove);
+    }
     public void setFrame(ChessGameFrame frame) {
         this.frame = frame;
     }

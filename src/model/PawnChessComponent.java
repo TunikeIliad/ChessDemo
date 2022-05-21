@@ -152,6 +152,32 @@ public class PawnChessComponent extends ChessComponent{
         }
         return way;
     }
+    public List<ChessComponent> getAttackPoints(ChessComponent[][] chessComponents){
+        ArrayList<ChessComponent> way = new ArrayList<>();
+        if(getChessColor() == ChessColor.BLACK){
+            for(int i = -1; i < 2; i++){
+                if(i == 0) i++;
+                if(getChessboardPoint().offset(1, i) != null){
+                    view.ChessboardPoint p = getChessboardPoint().offset(1, i);
+                    ChessComponent c = chessComponents[p.getX()][p.getY()];
+                    if(c.getChessColor() == ChessColor.WHITE)
+                        way.add(c);
+                }
+            }
+        }
+        if(getChessColor() == ChessColor.WHITE){
+            for(int i = -1; i < 2; i++){
+                if(i == 0)i++;
+                if(getChessboardPoint().offset(-1, i) != null){
+                    view.ChessboardPoint p = getChessboardPoint().offset(-1, i);
+                    ChessComponent c = chessComponents[p.getX()][p.getY()];
+                    if(c.getChessColor() == ChessColor.BLACK)
+                        way.add(c);
+                }
+            }
+        }
+        return way;
+    }
 
     @Override
     protected void paintComponent(Graphics g) {
