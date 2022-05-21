@@ -48,6 +48,7 @@ public class ClickController {
                 setBgm();
                 first.setSelected(false);
                 first = null;
+                chessboard.saveBoard(chessboard.saveGame());
             }
         }
     }

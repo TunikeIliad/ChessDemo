@@ -58,6 +58,7 @@ public class ChessGameFrame extends JFrame {
         label.add(addLoadButton());
         label.add(addSaveButton());
         label.add(addSetBackButton());
+        label.add(addRetractButton());
     }
 
 
@@ -100,8 +101,8 @@ public class ChessGameFrame extends JFrame {
 
     private JButton addResetButton() {
         JButton button = new JButton("Reset");
-        button.setLocation(HEIGTH, HEIGTH / 10 + 120);
-        button.setSize(200, 60);
+        button.setLocation(HEIGTH-20, HEIGTH / 10 + 120);
+        button.setSize(100, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         button.addActionListener((e) ->
                 {
@@ -117,8 +118,8 @@ public class ChessGameFrame extends JFrame {
     //读档按钮
     private JButton addLoadButton() {
         JButton button = new JButton("Load");
-        button.setLocation(HEIGTH, HEIGTH / 10 + 200);
-        button.setSize(200, 60);
+        button.setLocation(HEIGTH+90, HEIGTH / 10 + 120);
+        button.setSize(100, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
 
         button.addActionListener(e -> {
@@ -195,8 +196,8 @@ public class ChessGameFrame extends JFrame {
 
     private JButton addSaveButton(){
         JButton button = new JButton("Save");
-        button.setLocation(HEIGTH, HEIGTH / 10 + 280);
-        button.setSize(200, 60);
+        button.setLocation(HEIGTH-20, HEIGTH / 10 + 200);
+        button.setSize(100, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
 
         button.addActionListener(e -> {
@@ -214,13 +215,29 @@ public class ChessGameFrame extends JFrame {
     //切换壁纸
     private JButton addSetBackButton() {
         JButton button = new JButton("Theme");
-        button.setLocation(HEIGTH, HEIGTH / 10 + 360);
-        button.setSize(200, 60);
+        button.setLocation(HEIGTH+90, HEIGTH / 10 + 200);
+        button.setSize(100, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         button.addActionListener((e) ->
                 {
                     Theme = Theme == chessboardTheme1 ? chessboardTheme2 : chessboardTheme1;
                     label.setIcon(Theme);
+                }
+        );
+        return button;
+    }
+
+    //悔棋
+    private JButton addRetractButton(){
+        JButton button = new JButton("Retract");
+        button.setLocation(HEIGTH-15, HEIGTH / 10 + 280);
+        button.setSize(200, 60);
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        button.addActionListener((e) ->
+                {
+                    if(!(chessboard.retract(1))){
+                        JOptionPane.showMessageDialog(null,"You can't retract", "Message", JOptionPane.PLAIN_MESSAGE);
+                    }
                 }
         );
         return button;
