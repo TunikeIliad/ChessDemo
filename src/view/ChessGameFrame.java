@@ -42,6 +42,7 @@ public class ChessGameFrame extends JFrame {
     //时间显示
     public JLabel showTime = new JLabel();
     int timeCounter = 30;
+    public int score=0;
 
     public ChessGameFrame(int width, int height) {
         container=this.getContentPane();
@@ -289,9 +290,15 @@ public class ChessGameFrame extends JFrame {
     }
     //胜利
     public void showVictory(){
-        if(chessboard.getWinner() == ChessColor.BLACK)
+        if(chessboard.getWinner() == ChessColor.BLACK){
             JOptionPane.showMessageDialog(null,"黑方获胜！","Congratulations!", JOptionPane.PLAIN_MESSAGE);
-        else JOptionPane.showMessageDialog(null,"白方获胜！","Congratulations!", JOptionPane.PLAIN_MESSAGE);
+        }
+
+        else {
+            JOptionPane.showMessageDialog(null,"白方获胜！","Congratulations!", JOptionPane.PLAIN_MESSAGE);
+            score++;
+            userRankLabel.setText("用户分数："+score);
+        }
         chessboard.setVisible(false);
         remove(chessboard);
         label.add(addChessboard());
@@ -318,6 +325,6 @@ public class ChessGameFrame extends JFrame {
     }
     public void setUserText(User user){
         userLabel.setText("用户名："+user .userName) ;
-        userRankLabel.setText("用户排行："+user.rank);
+        userRankLabel.setText("用户分数："+score);
     }
 }
