@@ -1,11 +1,14 @@
 package model;
 
 
+import controller.MoveController;
 import view.ChessboardPoint;
 import controller.ClickController;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,6 +18,7 @@ public class KingChessComponent extends ChessComponent{
     private static Image KING_WHITE;
     private static Image KING_BLACK;
     private Image kingImage;
+    private boolean isEnter=false;
 
     public void loadResource() throws IOException {
         if (KING_WHITE == null) {
@@ -39,13 +43,27 @@ public class KingChessComponent extends ChessComponent{
         }
     }
 
-    public KingChessComponent(ChessboardPoint chessboardPoint, Point location, ChessColor color, ClickController listener, int size) {
-        super(chessboardPoint, location, color, listener, size);
+    public KingChessComponent(ChessboardPoint chessboardPoint, Point location, ChessColor color, MoveController moveController,ClickController listener, int size) {
+        super(chessboardPoint, location, color,moveController, listener, size);
         initiateRookImage(color);
         if(color==ChessColor.BLACK)
             name='K';
         else
             name='k';
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                isEnter=true;
+                repaint();
+            }
+            public void mouseExited(MouseEvent e){
+                super.mouseExited(e);
+                isEnter=false;
+                repaint();
+
+            }
+        });
     }
 
 
@@ -111,6 +129,10 @@ public class KingChessComponent extends ChessComponent{
         if(isAttacked()){
             g.setColor(Color.RED);
             g.drawOval(0, 0, getWidth() , getHeight());
+        }
+        if (isEnter==true){
+            g.setColor(new Color(97, 2, 2, 151));
+            g.fillRect(0, 0, this.getWidth(), this.getHeight());
         }
     }
 }

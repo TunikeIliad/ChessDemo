@@ -43,6 +43,7 @@ public class ChessboardStartScreen extends JFrame{
         setBgm();
         User user1=new User("1","1");
         User user2=new User("2","2");
+        User user3=new User("101","LinMingFei");
 
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cff068de-b8d7-4ddb-a13b-fdf9e29ab707" name="Changes" comment="新增了一个真的登录界面">
+    <list default="true" id="cff068de-b8d7-4ddb-a13b-fdf9e29ab707" name="Changes" comment="新增了一个假的用户排行">
+      <change afterPath="$PROJECT_DIR$/src/controller/MoveController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ChessGameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ChessGameFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/BishopChessComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/BishopChessComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ChessComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ChessComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/EmptySlotComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/EmptySlotComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/KingChessComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/KingChessComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/KnightChessComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/KnightChessComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/PawnChessComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/PawnChessComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/QueenChessComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/QueenChessComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/RookChessComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/RookChessComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/Chessboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Chessboard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/ChessboardStartScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ChessboardStartScreen.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -246,7 +254,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653122559476</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="新增了一个假的用户排行">
+      <created>1653124241098</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1653124241098</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -344,7 +359,8 @@
     <MESSAGE value="修正了存档" />
     <MESSAGE value="新增了一个假的登录界面" />
     <MESSAGE value="新增了一个真的登录界面" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增了一个真的登录界面" />
+    <MESSAGE value="新增了一个假的用户排行" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增了一个假的用户排行" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ChessDemo$Unnamed.ic" NAME="Unnamed Coverage Results" MODIFIED="1652687247541" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

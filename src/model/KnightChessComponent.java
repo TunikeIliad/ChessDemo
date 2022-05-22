@@ -1,10 +1,13 @@
 package model;
 
+import controller.MoveController;
 import view.ChessboardPoint;
 import controller.ClickController;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,6 +17,7 @@ public class KnightChessComponent extends ChessComponent{
     private static Image KNIGHT_WHITE;
     private static Image KNIGHT_BLACK;
     private Image knightImage;
+    private boolean isEnter=false;
 
     public void loadResource() throws IOException {
         if (KNIGHT_WHITE == null) {
@@ -38,13 +42,27 @@ public class KnightChessComponent extends ChessComponent{
         }
     }
 
-    public KnightChessComponent(ChessboardPoint chessboardPoint, Point location, ChessColor color, ClickController listener, int size) {
-        super(chessboardPoint, location, color, listener, size);
+    public KnightChessComponent(ChessboardPoint chessboardPoint, Point location, MoveController moveController, ChessColor color, ClickController listener, int size) {
+        super(chessboardPoint, location, color,moveController, listener, size);
         initiateKnightImage(color);
         if(color==ChessColor.BLACK)
             name='N';
         else
             name='n';
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                isEnter=true;
+                repaint();
+            }
+            public void mouseExited(MouseEvent e){
+                super.mouseExited(e);
+                isEnter=false;
+                repaint();
+
+            }
+        });
     }
 
     @Override
@@ -96,6 +114,10 @@ public class KnightChessComponent extends ChessComponent{
         if(isAttacked()){
             g.setColor(Color.RED);
             g.drawOval(0, 0, getWidth() , getHeight());
+        }
+        if (isEnter==true){
+            g.setColor(new Color(97, 2, 2, 151));
+            g.fillRect(0, 0, this.getWidth(), this.getHeight());
         }
     }
 

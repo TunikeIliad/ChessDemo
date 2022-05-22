@@ -1,5 +1,6 @@
 package model;
 
+import controller.MoveController;
 import view.Chessboard;
 import view.ChessboardPoint;
 import controller.ClickController;
@@ -25,12 +26,12 @@ public abstract class ChessComponent extends JComponent {
      */
 
 //    private static final Dimension CHESSGRID_SIZE = new Dimension(1080 / 4 * 3 / 8, 1080 / 4 * 3 / 8);
-    private static final Color[] BACKGROUND_COLORS = {Color.WHITE, Color.LIGHT_GRAY};
+    private static final Color[] BACKGROUND_COLORS = {Color.WHITE, Color.LIGHT_GRAY,Color.CYAN};
     /**
      * handle click event
      */
     private ClickController clickController;
-
+    private MoveController moveController;
     /**
      * chessboardPoint: 表示8*8棋盘中，当前棋子在棋格对应的位置，如(0, 0), (1, 0), (0, 7),(7, 7)等等
      * <br>
@@ -39,7 +40,7 @@ public abstract class ChessComponent extends JComponent {
      * selected: 表示这个棋子是否被选中
      */
     private ChessboardPoint chessboardPoint;
-    protected final ChessColor chessColor;
+    protected  ChessColor chessColor;
     private boolean selected;
     private boolean attacked;
     protected Chessboard chessboard;//王不吃王
@@ -47,8 +48,9 @@ public abstract class ChessComponent extends JComponent {
     protected List<ChessComponent> beingAttacked = new ArrayList<>();//会被谁攻击
     protected boolean tryToAttackKing = false;
     protected char name;
+    public Graphics g;
 
-    protected ChessComponent(ChessboardPoint chessboardPoint, Point location, ChessColor chessColor, ClickController clickController, int size) {
+    protected ChessComponent(ChessboardPoint chessboardPoint, Point location, ChessColor chessColor,MoveController moveController, ClickController clickController, int size) {
         enableEvents(AWTEvent.MOUSE_EVENT_MASK);
         setLocation(location);
         setSize(size, size);
@@ -57,6 +59,7 @@ public abstract class ChessComponent extends JComponent {
         this.selected = false;
         this.attacked = false;
         this.clickController = clickController;
+        this.moveController=moveController;
     }
 
     public ChessboardPoint getChessboardPoint() {
@@ -155,7 +158,11 @@ public abstract class ChessComponent extends JComponent {
             System.out.printf("Click [%d,%d]\n", chessboardPoint.getX(), chessboardPoint.getY());
             clickController.onClick(this);
         }
-    }                                                              
+
+        if(e.getID()==MouseEvent.MOUSE_MOVED ){
+            moveController.changeColor(this);
+        }
+    }
 
     /**
      * @param chessboard  棋盘
@@ -180,10 +187,17 @@ public abstract class ChessComponent extends JComponent {
         Color squareColor = BACKGROUND_COLORS[(chessboardPoint.getX() + chessboardPoint.getY()) % 2];
         g.setColor(squareColor);
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
+        this.g=g;
     }
 
 
     public char Name() {
         return name;
+    }
+
+    protected void mouseEntered(MouseEvent e) {
+    }
+
+    protected void mouseExited(MouseEvent e) {
     }
 }

@@ -1,10 +1,14 @@
 package model;
 
+import controller.MoveController;
 import view.ChessboardPoint;
 import controller.ClickController;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,7 +18,7 @@ public class BishopChessComponent extends ChessComponent{
     private static Image BISHOP_WHITE;
     private static Image BISHOP_BLACK;
     private Image bishopImage;
-
+    private boolean isEnter=false;
     public void loadResource() throws IOException {
         if (BISHOP_WHITE == null) {
             BISHOP_WHITE = ImageIO.read(new File("./images/Bishop-white.png"));
@@ -38,13 +42,27 @@ public class BishopChessComponent extends ChessComponent{
         }
     }
 
-    public BishopChessComponent(ChessboardPoint chessboardPoint, Point location, ChessColor color, ClickController listener, int size) {
-        super(chessboardPoint, location, color, listener, size);
+    public BishopChessComponent(ChessboardPoint chessboardPoint, Point location, ChessColor color, MoveController moveController, ClickController listener, int size) {
+        super(chessboardPoint, location, color, moveController, listener, size);
         initiateBishopImage(color);
         if(color==ChessColor.BLACK)
             name='B';
         else
             name='b';
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                isEnter=true;
+                repaint();
+            }
+            public void mouseExited(MouseEvent e){
+                super.mouseExited(e);
+                isEnter=false;
+                repaint();
+
+            }
+        });
     }
 
     @Override
@@ -108,5 +126,15 @@ public class BishopChessComponent extends ChessComponent{
             g.setColor(Color.RED);
             g.drawOval(0, 0, getWidth() , getHeight());
         }
+//        if(isEnter){
+//            Color squareColor = Color.RED;
+//            g.setColor(squareColor);
+//            g.fillRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+//        }
+        if (isEnter==true){
+            g.setColor(new Color(97, 2, 2, 151));
+            g.fillRect(0, 0, this.getWidth(), this.getHeight());
+        }
     }
+
 }
