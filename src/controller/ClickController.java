@@ -52,6 +52,7 @@ public class ClickController {
                 first = null;
                 chessboard.saveBoard(chessboard.saveGame());
                 chessboard.showKingAttacked();
+                chessboard.frame.resetTime();
                 if(chess2 instanceof KingChessComponent){
                     chessboard.setWinner(chess1.getChessColor());chessboard.setCheckmate(true);
                     chessboard.frame.showVictory();

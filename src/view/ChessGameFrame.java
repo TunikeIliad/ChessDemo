@@ -8,11 +8,15 @@ import javax.swing.*;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -35,6 +39,9 @@ public class ChessGameFrame extends JFrame {
     public User user=new User();
     JLabel userLabel = new JLabel();
     JLabel userRankLabel = new JLabel();
+    //时间显示
+    public JLabel showTime = new JLabel();
+    int timeCounter = 30;
 
     public ChessGameFrame(int width, int height) {
         container=this.getContentPane();
@@ -57,7 +64,7 @@ public class ChessGameFrame extends JFrame {
         container.add(label);
 
         label.add(addChessboard());
-        label.add(addLabel());
+        label.add(addLabel());//行棋方
         label.add(addResetButton());
         label.add(addLoadButton());
         label.add(addSaveButton());
@@ -65,6 +72,7 @@ public class ChessGameFrame extends JFrame {
         label.add(addRetractButton());
         label.add(addUserLabel());
         label.add(userRankLabel);
+        label.add(addShowTime());
     }
 
 
@@ -84,7 +92,7 @@ public class ChessGameFrame extends JFrame {
      */
     private JLabel addLabel() {
         JLabel statusLabe2 = new JLabel("行棋方是白色方");
-        statusLabe2.setLocation(HEIGTH, HEIGTH / 10+20);
+        statusLabe2.setLocation(HEIGTH-10, HEIGTH / 10);
         statusLabe2.setSize(200, 60);
         statusLabe2.setFont(new Font("Rockwell", Font.BOLD, 20));
         statusLabe=statusLabe2;
@@ -100,6 +108,34 @@ public class ChessGameFrame extends JFrame {
             statusLabe.setText("行棋方是白色方");
         }
     }
+    //显示时间
+    private JLabel addShowTime(){
+        showTime.setText(timeCounter+" "+ "秒");
+        showTime.setLocation(HEIGTH+80, HEIGTH / 10+80);
+        showTime.setSize(60, 30);
+        showTime.setFont(new Font("Rockwell", Font.BOLD, 20));
+        java.util.Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                if(timeCounter > 0){
+                    timeCounter--;
+                } else{
+                    chessboard.swapColor();
+                    setStatusLabeText(chessboard.getCurrentColor());
+                    timeCounter = 30;
+                }
+                showTime.setText(String.valueOf(timeCounter) +" "+"秒");
+            }
+
+        };
+        timer.schedule(timerTask, 100L, 1000L);
+        return showTime;
+    }
+    //棋盘走了就要重置时间
+    public void resetTime(){
+        timeCounter = 30;
+    }
 
     /**
      * 重置游戏的按钮
@@ -107,8 +143,8 @@ public class ChessGameFrame extends JFrame {
 
     private JButton addResetButton() {
         JButton button = new JButton("Reset");
-        button.setLocation(HEIGTH-20, HEIGTH / 10 + 120);
-        button.setSize(100, 60);
+        button.setLocation(HEIGTH-20, HEIGTH / 10 + 180);
+        button.setSize(210, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         button.addActionListener((e) ->
                 {
@@ -116,6 +152,7 @@ public class ChessGameFrame extends JFrame {
                         remove(chessboard);
                         label.add(addChessboard());
                         setStatusLabeText(ChessColor.WHITE);
+                        resetTime();
                 }
         );
         return button;
@@ -124,7 +161,7 @@ public class ChessGameFrame extends JFrame {
     //读档按钮
     private JButton addLoadButton() {
         JButton button = new JButton("Load");
-        button.setLocation(HEIGTH+90, HEIGTH / 10 + 120);
+        button.setLocation(HEIGTH+90, HEIGTH / 10 + 260);
         button.setSize(100, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
 
@@ -195,6 +232,7 @@ public class ChessGameFrame extends JFrame {
                         errorTip2.setVisible(true);
                         break;
                 }
+                resetTime();
             }
         });
         return button;
@@ -202,7 +240,7 @@ public class ChessGameFrame extends JFrame {
 
     private JButton addSaveButton(){
         JButton button = new JButton("Save");
-        button.setLocation(HEIGTH-20, HEIGTH / 10 + 200);
+        button.setLocation(HEIGTH-20, HEIGTH / 10 + 260);
         button.setSize(100, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
 
@@ -221,8 +259,8 @@ public class ChessGameFrame extends JFrame {
     //切换壁纸
     private JButton addSetBackButton() {
         JButton button = new JButton("Theme");
-        button.setLocation(HEIGTH+90, HEIGTH / 10 + 200);
-        button.setSize(100, 60);
+        button.setLocation(HEIGTH-20, HEIGTH / 10 + 340);
+        button.setSize(210, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         button.addActionListener((e) ->
                 {
@@ -236,8 +274,8 @@ public class ChessGameFrame extends JFrame {
     //悔棋
     private JButton addRetractButton(){
         JButton button = new JButton("Retract");
-        button.setLocation(HEIGTH-15, HEIGTH / 10 + 280);
-        button.setSize(200, 60);
+        button.setLocation(HEIGTH-20, HEIGTH / 10 + 420);
+        button.setSize(210, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         button.addActionListener((e) ->
                 {
@@ -263,12 +301,12 @@ public class ChessGameFrame extends JFrame {
     private JLabel addUserLabel() {
         JLabel userLabel1 = new JLabel("用户名：");
         System.out.println(user.userName);
-        userLabel1.setLocation(HEIGTH, HEIGTH / 10+340);
+        userLabel1.setLocation(HEIGTH, HEIGTH / 10+470);
         userLabel1.setSize(100, 100);
         userLabel1.setFont(new Font("Rockwell", Font.BOLD, 20));
         userLabel=userLabel1;
         JLabel userLabel2 = new JLabel("用户名：");
-        userLabel2.setLocation(HEIGTH, HEIGTH / 10+370);
+        userLabel2.setLocation(HEIGTH, HEIGTH / 10+500);
         userLabel2.setSize(400, 100);
         userLabel2.setFont(new Font("Rockwell", Font.BOLD, 20));
         userRankLabel=userLabel2;
