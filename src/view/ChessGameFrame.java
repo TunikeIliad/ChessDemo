@@ -38,7 +38,7 @@ public class ChessGameFrame extends JFrame {
     public AudioClip aau;
     public URL cb;
     public File BGM1=new File("./music/bgm.wav");
-    public File BGM2=new File("./music/bgm.wav");
+    public File BGM2=new File("./music/bgm2.wav");
     //用户
     public User user=new User();
     JLabel userLabel = new JLabel();
