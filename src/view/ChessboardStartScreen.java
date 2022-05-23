@@ -40,7 +40,6 @@ public class ChessboardStartScreen extends JFrame{
         label.add(button);
         label.setIcon(chessboardStartScreen);
         add(label);
-        setBgm();
         User user1=new User("1","1");
         User user2=new User("2","2");
         User user3=new User("101","LinMingFei");
@@ -75,14 +74,24 @@ public class ChessboardStartScreen extends JFrame{
                 button1.addActionListener(r-> {
                     login.setVisible(false);
                     if(jtf1.getText().equals(user1.userName)&&jpf1.getText().equals(user1.password)){
-                        ChessGameFrame mainFrame = new ChessGameFrame(1000, 760);
+                        ChessGameFrame mainFrame = null;
+                        try {
+                            mainFrame = new ChessGameFrame(1000, 760);
+                        } catch (MalformedURLException ex) {
+                            ex.printStackTrace();
+                        }
                         mainFrame.setVisible(true);
                         mainFrame.chessboard.setFrame(mainFrame);
                         mainFrame.setUser(user1);
                         mainFrame.setUserText(user1) ;
                     }
                     else if(jtf1.getText().equals(user2.userName)&&jpf1.getText().equals(user2.password)){
-                        ChessGameFrame mainFrame = new ChessGameFrame(1000, 760);
+                        ChessGameFrame mainFrame = null;
+                        try {
+                            mainFrame = new ChessGameFrame(1000, 760);
+                        } catch (MalformedURLException ex) {
+                            ex.printStackTrace();
+                        }
                         mainFrame.setVisible(true);
                         mainFrame.chessboard.setFrame(mainFrame);
                         mainFrame.setUser(user2);
@@ -109,17 +118,5 @@ public class ChessboardStartScreen extends JFrame{
         setVisible(true); //Set the window to visible
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //let the window can be close by click "x"
     }
-    public void setBgm(){
-        try{
-            URL cb;
-            File f=new File("./music/bgm.wav");
-            cb=f.toURL();
 
-            aau=Applet.newAudioClip(cb);
-            aau.loop();
-            System.out.println("bgm is run") ;
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-    }
 }

@@ -34,7 +34,12 @@ public class ChessGameFrame extends JFrame {
     private ImageIcon Theme;
     private static ImageIcon chessboardTheme1 =new ImageIcon("./images/theme1.jpg");
     private static ImageIcon chessboardTheme2 =new ImageIcon("./images/theme2.jpg");
+    //主题音乐切换
     public AudioClip aau;
+    public URL cb;
+    public File BGM1=new File("./music/bgm.wav");
+    public File BGM2=new File("./music/bgm.wav");
+    //用户
     public User user=new User();
     JLabel userLabel = new JLabel();
     JLabel userRankLabel = new JLabel();
@@ -43,7 +48,7 @@ public class ChessGameFrame extends JFrame {
     int timeCounter = 30;
     public int score=0;
 
-    public ChessGameFrame(int width, int height) {
+    public ChessGameFrame(int width, int height) throws MalformedURLException {
         container=this.getContentPane();
         container.setLayout(null);
         setTitle("2022 CS102A Project Demo"); //设置标题
@@ -55,6 +60,8 @@ public class ChessGameFrame extends JFrame {
         setLocationRelativeTo(null); // Center the window.
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
         setLayout(null);
+        cb=BGM1.toURL();
+        setBgm();
 
 
         label.setVisible(true);
@@ -285,6 +292,8 @@ public class ChessGameFrame extends JFrame {
                 {
                     Theme = Theme == chessboardTheme1 ? chessboardTheme2 : chessboardTheme1;
                     label.setIcon(Theme);
+                    aau.stop();
+                    setBgm();
                 }
         );
         return button;
@@ -372,5 +381,15 @@ public class ChessGameFrame extends JFrame {
     public void setUserText(User user){
         userLabel.setText("用户名："+user .userName) ;
         userRankLabel.setText("用户分数："+score);
+    }
+    public void setBgm(){
+        try{
+            cb=cb==BGM1.toURL()?BGM2.toURL():BGM1.toURL();
+            aau=Applet.newAudioClip(cb);
+            aau.loop();
+            System.out.println("bgm is run") ;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 }
