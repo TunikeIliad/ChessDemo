@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cff068de-b8d7-4ddb-a13b-fdf9e29ab707" name="Changes" comment="更新了一个用户得分机制（用户为白方，白方胜用户积分增加）">
+    <list default="true" id="cff068de-b8d7-4ddb-a13b-fdf9e29ab707" name="Changes" comment="这次应该可以切换bgm了？">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/ChessGameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ChessGameFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ChessboardStartScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ChessboardStartScreen.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -258,7 +258,21 @@
       <option name="project" value="LOCAL" />
       <updated>1653236856100</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="应该可以切换bgm了？">
+      <created>1653270253272</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1653270253272</updated>
+    </task>
+    <task id="LOCAL-00015" summary="这次应该可以切换bgm了？">
+      <created>1653270483246</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1653270483246</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -358,7 +372,9 @@
     <MESSAGE value="新增了一个真的登录界面" />
     <MESSAGE value="新增了一个假的用户排行" />
     <MESSAGE value="划过键盘可以变色了" />
-    <option name="LAST_COMMIT_MESSAGE" value="划过键盘可以变色了" />
+    <MESSAGE value="应该可以切换bgm了？" />
+    <MESSAGE value="这次应该可以切换bgm了？" />
+    <option name="LAST_COMMIT_MESSAGE" value="这次应该可以切换bgm了？" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ChessDemo$Unnamed.ic" NAME="Unnamed Coverage Results" MODIFIED="1652687247541" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

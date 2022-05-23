@@ -384,7 +384,14 @@ public class ChessGameFrame extends JFrame {
     }
     public void setBgm(){
         try{
-            cb=cb==BGM1.toURL()?BGM2.toURL():BGM1.toURL();
+            if(cb.equals(BGM1.toURL()) ){
+                cb=BGM2.toURL();
+                System.out.println("cb1");
+            }
+            else{
+                cb=BGM1.toURL();
+                System.out.println("cb2");
+            }
             aau=Applet.newAudioClip(cb);
             aau.loop();
             System.out.println("bgm is run") ;
