@@ -41,12 +41,15 @@ public abstract class ChessComponent extends JComponent {
      */
     private ChessboardPoint chessboardPoint;
     protected  ChessColor chessColor;
+    private boolean AI;
     private boolean selected;
     private boolean attacked;
     protected Chessboard chessboard;//王不吃王
     protected List<ChessComponent> attackWay = new ArrayList<>();//攻击范围
     protected List<ChessComponent> beingAttacked = new ArrayList<>();//会被谁攻击
     protected boolean tryToAttackKing = false;
+    protected boolean checkPawnNear = false;//吃过路兵
+    protected int cpstep = 0;//过路兵计时
     protected char name;
     public Graphics g;
 
@@ -60,20 +63,18 @@ public abstract class ChessComponent extends JComponent {
         this.attacked = false;
         this.clickController = clickController;
         this.moveController=moveController;
+        this.AI = false;
     }
 
     public ChessboardPoint getChessboardPoint() {
         return chessboardPoint;
     }
-
     public void setChessboardPoint(ChessboardPoint chessboardPoint) {
         this.chessboardPoint = chessboardPoint;
     }
-
     public ChessColor getChessColor() {
         return chessColor;
     }
-
     public boolean isSelected() {
         return selected;
     }
@@ -84,7 +85,20 @@ public abstract class ChessComponent extends JComponent {
     public void setAttacked(boolean attacked){
         this.attacked = attacked;
     }
+    public boolean isAI(){return AI;}
+    public void setAI(boolean AI) {
+        this.AI = AI;
+    }
+
     public void setChessboard(Chessboard chessboard){this.chessboard = chessboard;}//王不吃王
+    public void setCheckPawnNear(boolean b){checkPawnNear = b;}
+    public boolean getCheckPawnNear(){return checkPawnNear;}
+    public void setCpstep(int cpstep) {
+        this.cpstep = cpstep;
+    }
+    public int getCpstep() {
+        return cpstep;
+    }
 
     public void setAttackWay(List<ChessComponent> chessComponentList){
         attackWay.clear();

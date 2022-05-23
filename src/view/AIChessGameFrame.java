@@ -1,19 +1,14 @@
 package view;
 
 import controller.GameController;
-import model.*;
+import model.ChessColor;
+import model.User;
 
 import javax.swing.*;
-import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -21,7 +16,7 @@ import java.util.TimerTask;
 /**
  * 这个类表示游戏过程中的整个游戏界面，是一切的载体
  */
-public class ChessGameFrame extends JFrame {
+public class AIChessGameFrame extends JFrame {
     //    public final Dimension FRAME_SIZE ;
     private final int WIDTH;
     private final int HEIGTH;
@@ -41,9 +36,8 @@ public class ChessGameFrame extends JFrame {
     //时间显示
     public JLabel showTime = new JLabel();
     int timeCounter = 30;
-    public int score=0;
 
-    public ChessGameFrame(int width, int height) {
+    public AIChessGameFrame(int width, int height) {
         container=this.getContentPane();
         container.setLayout(null);
         setTitle("2022 CS102A Project Demo"); //设置标题
@@ -83,7 +77,7 @@ public class ChessGameFrame extends JFrame {
         chessboard = new Chessboard(CHESSBOARD_SIZE, CHESSBOARD_SIZE);
         gameController = new GameController(chessboard);
         chessboard.setLocation(HEIGTH / 10, HEIGTH / 10);
-        chessboard.setFrame(this);
+        chessboard.setAIFrame(this);
         return chessboard;
     }
 
@@ -114,7 +108,7 @@ public class ChessGameFrame extends JFrame {
         showTime.setLocation(HEIGTH+80, HEIGTH / 10+80);
         showTime.setSize(60, 30);
         showTime.setFont(new Font("Rockwell", Font.BOLD, 20));
-        java.util.Timer timer = new Timer();
+        Timer timer = new Timer();
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
@@ -148,11 +142,11 @@ public class ChessGameFrame extends JFrame {
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         button.addActionListener((e) ->
                 {
-                        chessboard.setVisible(false);
-                        remove(chessboard);
-                        label.add(addChessboard());
-                        setStatusLabeText(ChessColor.WHITE);
-                        resetTime();
+                    chessboard.setVisible(false);
+                    remove(chessboard);
+                    label.add(addChessboard());
+                    setStatusLabeText(ChessColor.WHITE);
+                    resetTime();
                 }
         );
         return button;
@@ -187,7 +181,7 @@ public class ChessGameFrame extends JFrame {
                 chessboard = new Chessboard();
                 gameController = new GameController(chessboard);
                 chessboard.setLocation(HEIGTH / 10, HEIGTH / 10);
-                chessboard.setFrame(this);
+                chessboard.setAIFrame(this);
                 label.add(chessboard);
                 switch(gameController.loadGameFromFile(path)){
                     case 0:
@@ -289,47 +283,13 @@ public class ChessGameFrame extends JFrame {
     }
     //胜利
     public void showVictory(){
-        if(chessboard.getWinner() == ChessColor.BLACK){
+        if(chessboard.getWinner() == ChessColor.BLACK)
             JOptionPane.showMessageDialog(null,"黑方获胜！","Congratulations!", JOptionPane.PLAIN_MESSAGE);
-        }
-
-        else {
-            JOptionPane.showMessageDialog(null,"白方获胜！","Congratulations!", JOptionPane.PLAIN_MESSAGE);
-            score++;
-            userRankLabel.setText("用户分数："+score);
-        }
+        else JOptionPane.showMessageDialog(null,"白方获胜！","Congratulations!", JOptionPane.PLAIN_MESSAGE);
         chessboard.setVisible(false);
         remove(chessboard);
         label.add(addChessboard());
         setStatusLabeText(ChessColor.WHITE);
-    }
-    //兵底线升变
-    public void pawnChangeTo(ChessComponent chessComponent){
-        Object[] chess = {"后", "车", "马", "象"};
-        int op = JOptionPane.showOptionDialog(null, "请选择要变成的棋子:\n","兵底线升变",
-                JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, chess, chess[0]);
-        int row = chessComponent.getChessboardPoint().getX(), col = chessComponent.getChessboardPoint().getY();
-        switch (op){
-            case 0 :
-                chessboard.putChessOnBoard(new QueenChessComponent(chessComponent.getChessboardPoint(), chessComponent.getLocation(),
-                        chessComponent.getChessColor(), chessboard.getMoveController(), chessboard.getClickController(), chessboard.getCHESS_SIZE()));
-                ChessComponent[][] q = chessboard.getChessComponents();q[row][col].repaint();break;
-
-            case 1 :
-                chessboard.putChessOnBoard(new RookChessComponent(chessComponent.getChessboardPoint(), chessComponent.getLocation(),
-                        chessComponent.getChessColor(), chessboard.getMoveController(), chessboard.getClickController(), chessboard.getCHESS_SIZE()));
-                ChessComponent[][] r = chessboard.getChessComponents();r[row][col].repaint();break;
-
-            case 2 :
-                chessboard.putChessOnBoard(new KnightChessComponent(chessComponent.getChessboardPoint(), chessComponent.getLocation(),
-                        chessboard.getMoveController(), chessComponent.getChessColor(), chessboard.getClickController(), chessboard.getCHESS_SIZE()));
-                ChessComponent[][] n = chessboard.getChessComponents();n[row][col].repaint();break;
-
-            case 3 :
-                chessboard.putChessOnBoard(new BishopChessComponent(chessComponent.getChessboardPoint(), chessComponent.getLocation(),
-                        chessComponent.getChessColor(), chessboard.getMoveController(), chessboard.getClickController(), chessboard.getCHESS_SIZE()));
-                ChessComponent[][] b = chessboard.getChessComponents();b[row][col].repaint();break;
-        }
     }
     //用户信息显示
     private JLabel addUserLabel() {
@@ -352,6 +312,6 @@ public class ChessGameFrame extends JFrame {
     }
     public void setUserText(User user){
         userLabel.setText("用户名："+user .userName) ;
-        userRankLabel.setText("用户分数："+score);
+        userRankLabel.setText("用户排行："+user.rank);
     }
 }

@@ -18,6 +18,7 @@ public class PawnChessComponent extends ChessComponent{
     private static Image PAWN_BLACK;
     private Image pawnImage;
     private boolean isEnter=false;
+    private boolean changeOther = false;
 
     public void loadResource() throws IOException {
         if (PAWN_WHITE == null) {
@@ -64,6 +65,10 @@ public class PawnChessComponent extends ChessComponent{
             }
         });
     }
+    public void setChangeOther(boolean changeOther) {
+        this.changeOther = changeOther;
+    }
+    public boolean getChangeOther(){return changeOther;}
 
     @Override
     public boolean canMoveTo(ChessComponent[][] chessComponents, ChessboardPoint destination) {
@@ -72,30 +77,50 @@ public class PawnChessComponent extends ChessComponent{
         if(color == ChessColor.BLACK){
             if(Math.abs(destination.getY()-source.getY())==1){
                 if(x0+1 == x1){
-                    if (!(chessComponents[x0+1][destination.getY()] instanceof EmptySlotComponent))
+                    if (!(chessComponents[x0+1][destination.getY()] instanceof EmptySlotComponent)){
                         return true;
+                    }
+                }
+                else if(x0 == x1){
+                    if((chessComponents[x0][destination.getY()] instanceof PawnChessComponent && chessComponents[x0][destination.getY()].getCheckPawnNear())){
+                        return true;
+                    }
                 }
                 else return false;
             }
             if(source.getY() == destination.getY()){
                 if(x0 == 1 && x0+2 == x1){
                     if (!(chessComponents[x0+1][destination.getY()] instanceof EmptySlotComponent) ||
-                            !(chessComponents[x0+2][destination.getY()] instanceof EmptySlotComponent))
+                            !(chessComponents[x0+2][destination.getY()] instanceof EmptySlotComponent)){
                         return false;
+                    }
+                    if ((chessComponents[x0+1][destination.getY()] instanceof EmptySlotComponent) &&
+                            (chessComponents[x0+2][destination.getY()] instanceof EmptySlotComponent)){
+                        setCheckPawnNear(true);
+                        return true;
+                    }
                 }
                 else if(x0+1 == x1){
-                    if (!(chessComponents[x0+1][destination.getY()] instanceof EmptySlotComponent))
+                    if (!(chessComponents[x0+1][destination.getY()] instanceof EmptySlotComponent)){
                         return false;
+                    }
                 }
                 else return false;
             }
             else return false;
         }
+        //白棋走法
         if(color == ChessColor.WHITE){
             if(Math.abs(destination.getY()-source.getY())==1){
                 if(x0-1 == x1){
-                    if (!(chessComponents[x0-1][destination.getY()] instanceof EmptySlotComponent))
+                    if (!(chessComponents[x0-1][destination.getY()] instanceof EmptySlotComponent)){
                         return true;
+                    }
+                }
+                else if(x0 == x1){
+                    if((chessComponents[x0][destination.getY()] instanceof PawnChessComponent && chessComponents[x0][destination.getY()].getCheckPawnNear())){
+                        return true;
+                    }
                 }
                 else return false;
             }
@@ -104,10 +129,17 @@ public class PawnChessComponent extends ChessComponent{
                     if (!(chessComponents[x0-1][destination.getY()] instanceof EmptySlotComponent) ||
                             !(chessComponents[x0-2][destination.getY()] instanceof EmptySlotComponent))
                         return false;
+                    if ((chessComponents[x0-1][destination.getY()] instanceof EmptySlotComponent) &&
+                            (chessComponents[x0-2][destination.getY()] instanceof EmptySlotComponent)){
+                        setCheckPawnNear(true);
+                        return true;
+                    }
+
                 }
                 else if(x0-1 == x1){
-                    if (!(chessComponents[x0-1][destination.getY()] instanceof EmptySlotComponent))
+                    if (!(chessComponents[x0-1][destination.getY()] instanceof EmptySlotComponent)){
                         return false;
+                    }
                 }
                 else return false;
             }

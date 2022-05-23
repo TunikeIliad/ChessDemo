@@ -4,6 +4,7 @@ package controller;
 import model.ChessColor;
 import model.ChessComponent;
 import model.KingChessComponent;
+import model.PawnChessComponent;
 import sun.applet.AppletAudioClip;
 import view.Chessboard;
 
@@ -26,7 +27,7 @@ public class ClickController {
     }
 
     public void onClick(ChessComponent chessComponent) {
-        if (first == null) {
+        if (first == null && !(chessComponent.isAI())) {
             if (handleFirst(chessComponent)) {
                 chessComponent.setSelected(true);
                 first = chessComponent;
@@ -44,12 +45,21 @@ public class ClickController {
                 //repaint in swap chess method.
                 removeMovePoint(first);
                 ChessComponent chess1 = first, chess2 = chessComponent;
+                //先看看有没有过路兵可以吃
+                if(checkNearBy(chess1,chess2)){
+                    movePawnNearby(chessComponent);
+                }
                 chessboard.swapChessComponents(first, chessComponent);
                 chessboard.swapColor();
                 chessboard.frame.setStatusLabeText(chessboard.getCurrentColor());
                 setBgm();
                 first.setSelected(false);
-                first = null;
+                //走完棋要看看有没有新的过路兵
+                if(first.getCheckPawnNear()){
+                    chessboard.nearbyPawn.add(first);
+                }
+                checkChangeOther(first);//兵底线升变
+                first = null;chessboard.frame.resetTime();
                 chessboard.saveBoard(chessboard.saveGame());
                 chessboard.showKingAttacked();
                 chessboard.frame.resetTime();
@@ -99,7 +109,6 @@ public class ClickController {
         }
 
     }
-
     private void removeMovePoint(ChessComponent chessComponent){
         ArrayList<ChessComponent> c = new ArrayList<>(chessComponent.getCanMovePoints(chessboard.getChessComponents()));
         if(c.size() != 0){
@@ -108,6 +117,49 @@ public class ClickController {
                 c.get(i).repaint();
             }
         }
+
+    }
+
+    //兵底线升变
+    public void checkChangeOther(ChessComponent chessComponent){
+        if(chessComponent instanceof PawnChessComponent){
+            if(chessComponent.getChessboardPoint().getX() == 0 && chessComponent.getChessColor() == ChessColor.WHITE){
+                chessboard.frame.pawnChangeTo(chessComponent);
+            }
+            if(chessComponent.getChessboardPoint().getX() == 7 && chessComponent.getChessColor() == ChessColor.BLACK){
+                chessboard.frame.pawnChangeTo(chessComponent);
+            }
+        }
+    }
+    //吃过路兵
+    public boolean checkNearBy(ChessComponent chess1, ChessComponent chess2){
+        boolean b = false;
+        if(chessboard.nearbyPawn.size() != 0){
+            ChessComponent p = chessboard.nearbyPawn.get(0);
+            if(p.getChessboardPoint().toString().equals(chess2.getChessboardPoint().toString()) &&
+                    chess1 instanceof PawnChessComponent && chess2 instanceof PawnChessComponent &&
+                    chess1.getChessboardPoint().getX() == chess2.getChessboardPoint().getX()){
+                b = true;
+                chessboard.nearbyPawn.clear();
+
+            }
+            else {
+                p.setCheckPawnNear(false);
+                chessboard.nearbyPawn.clear();
+            }
+        }
+        return b;
+    }
+    public void movePawnNearby(ChessComponent chessComponent){
+        ChessComponent[][] c = chessboard.getChessComponents();
+        int row = chessComponent.getChessboardPoint().getX(), col = chessComponent.getChessboardPoint().getY();
+        if(chessComponent.getChessColor() == ChessColor.BLACK){
+            chessboard.swapChessComponents(chessComponent, c[row-1][col]);
+        }
+        else if(chessComponent.getChessColor() == ChessColor.WHITE){
+            chessboard.swapChessComponents(chessComponent, c[row+1][col]);
+        }
+
 
     }
     public void setBgm(){

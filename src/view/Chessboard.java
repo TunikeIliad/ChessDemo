@@ -1,15 +1,12 @@
 package view;
 
 
-import controller.GameController;
 import controller.MoveController;
 import model.*;
 import controller.ClickController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,10 +27,12 @@ public class Chessboard extends JComponent {
      */
     private static final int CHESSBOARD_SIZE = 8;
     public ChessGameFrame frame;
+    public AIChessGameFrame aiFrame;//AI
     private final ChessComponent[][] chessComponents = new ChessComponent[CHESSBOARD_SIZE][CHESSBOARD_SIZE];
     private ChessColor currentColor = ChessColor.WHITE;
     //all chessComponents in this chessboard are shared only one model controller
     private final ClickController clickController = new ClickController(this);
+    //private final AIClickController aiclickController = new AIClickController(this);//AI
     private final int CHESS_SIZE;
     //判断王不吃王
     private ChessboardPoint blackKingPoint = new ChessboardPoint(0,CHESSBOARD_SIZE - 4),
@@ -47,6 +46,11 @@ public class Chessboard extends JComponent {
     private ChessColor winner;
     //悔棋时的存储棋盘
     private List<String> boardList = new ArrayList<>();
+    //AI棋盘
+    private List<ChessComponent> AIChess = new ArrayList<>();
+    //存储刚出炉的过路兵
+    public List<ChessComponent> nearbyPawn = new ArrayList<>();
+
     //划过键盘颜色改变
     private final MoveController moveController=new MoveController(this);
 
@@ -92,6 +96,11 @@ public class Chessboard extends JComponent {
     public ChessColor getWinner(){return winner;}
     public void setCheckmate(boolean checkmate){this.checkmate = checkmate;}
     public boolean getCheckmate(){return checkmate;}
+    public ClickController getClickController(){return clickController;}
+    public int getCHESS_SIZE(){return CHESS_SIZE;}
+    public MoveController getMoveController() {
+        return moveController;
+    }
 
     public void putChessOnBoard(ChessComponent chessComponent) {
         int row = chessComponent.getChessboardPoint().getX(), col = chessComponent.getChessboardPoint().getY();
@@ -99,19 +108,6 @@ public class Chessboard extends JComponent {
             remove(chessComponents[row][col]);
         }
         add(chessComponents[row][col] = chessComponent);
-    }
-    public void test(){
-        System.out.println(chessComponents[0][0]);
-        remove(chessComponents[0][0]);
-        ChessComponent c;
-        add(c = new EmptySlotComponent(chessComponents[0][0].getChessboardPoint(), moveController,chessComponents[0][0].getLocation(),  clickController, CHESS_SIZE));
-        //System.out.println(chessComponents[0][0]);
-        //System.out.println(c);
-        chessComponents[0][0] = c;c.repaint();
-        System.out.println(chessComponents[0][0]);
-        putChessOnBoard(new QueenChessComponent(new ChessboardPoint(0, 0), calculatePoint(0, 0),ChessColor.BLACK,moveController, clickController, CHESS_SIZE));
-        chessComponents[0][0].repaint();
-        System.out.println(chessComponents[0][0]);
     }
 
     public void swapChessComponents(ChessComponent chess1, ChessComponent chess2) {
@@ -496,6 +492,9 @@ public class Chessboard extends JComponent {
     }
     public void setFrame(ChessGameFrame frame) {
         this.frame = frame;
+    }
+    public void setAIFrame(AIChessGameFrame aiFrame) {
+        this.aiFrame = aiFrame;
     }
 
 }
