@@ -182,15 +182,16 @@ public class ChessGameFrame extends JFrame {
                 errorTip.setVisible(true);
             }
             else{
-                chessboard.setVisible(false);
-                remove(chessboard);
-                chessboard = new Chessboard();
-                gameController = new GameController(chessboard);
-                chessboard.setLocation(HEIGTH / 10, HEIGTH / 10);
-                chessboard.setFrame(this);
-                label.add(chessboard);
                 switch(gameController.loadGameFromFile(path)){
                     case 0:
+                        chessboard.setVisible(false);
+                        remove(chessboard);
+                        chessboard = new Chessboard();
+                        gameController = new GameController(chessboard);
+                        chessboard.setLocation(HEIGTH / 10, HEIGTH / 10);
+                        chessboard.setFrame(this);
+                        label.add(chessboard);
+                        gameController.loadGameFromFile(path);
                         break;
                     case 101:
                         JFrame errorTip = new JFrame("错误提示");
@@ -204,6 +205,8 @@ public class ChessGameFrame extends JFrame {
                         errorTip.setLayout(null);
                         errorTip.add(textLabel);
                         errorTip.setVisible(true);
+                        chessboard.retract(0);
+                        setStatusLabeText(chessboard.getCurrentColor());
                         break;
                     case 102:
                         JFrame errorTip1 = new JFrame("错误提示");
@@ -217,6 +220,8 @@ public class ChessGameFrame extends JFrame {
                         errorTip1.setLayout(null);
                         errorTip1.add(textLabel1);
                         errorTip1.setVisible(true);
+                        chessboard.retract(0);
+                        setStatusLabeText(chessboard.getCurrentColor());
                         break;
                     case 103:
                         JFrame errorTip2 = new JFrame("错误提示");
@@ -230,7 +235,21 @@ public class ChessGameFrame extends JFrame {
                         errorTip2.setLayout(null);
                         errorTip2.add(textLabel2);
                         errorTip2.setVisible(true);
+                        chessboard.retract(0);
+                        setStatusLabeText(chessboard.getCurrentColor());
                         break;
+                    case 104 :
+                        JFrame errorTip3 = new JFrame("错误提示");
+                        errorTip3.setLocationRelativeTo(null);
+                        errorTip3.setSize(400,150);
+                        JLabel textLabel3 = new JLabel("错误代码：104  文件格式错误");
+                        textLabel3.setSize(350, 90);
+                        textLabel3.setFont(new Font("Rockwell", Font.BOLD, 20));
+                        textLabel3.setVisible(true) ;
+                        errorTip3.setDefaultCloseOperation(errorTip3.getDefaultCloseOperation()); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
+                        errorTip3.setLayout(null);
+                        errorTip3.add(textLabel3);
+                        errorTip3.setVisible(true);
                 }
                 resetTime();
             }

@@ -23,9 +23,9 @@ public class GameController {
             int a=chessboard.loadGame(chessData);
             return a;
         } catch (IOException e) {
-            e.printStackTrace();
+            int a = 104;
+            return a;
         }
-        return null;
     }
 
 }
