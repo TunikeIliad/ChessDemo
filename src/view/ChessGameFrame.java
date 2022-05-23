@@ -155,11 +155,11 @@ public class ChessGameFrame extends JFrame {
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         button.addActionListener((e) ->
                 {
-                        chessboard.setVisible(false);
-                        remove(chessboard);
-                        label.add(addChessboard());
-                        setStatusLabeText(ChessColor.WHITE);
-                        resetTime();
+                    chessboard.setVisible(false);
+                    remove(chessboard);
+                    label.add(addChessboard());
+                    setStatusLabeText(ChessColor.WHITE);
+                    resetTime();
                 }
         );
         return button;
@@ -174,37 +174,15 @@ public class ChessGameFrame extends JFrame {
 
         button.addActionListener(e -> {
             System.out.println("Click load");
-            String path ="./resource/"+JOptionPane.showInputDialog(this,"Input Path here");
-            if(!path.contains(".txt")){
-                JFrame errorTip = new JFrame("错误提示");
-                errorTip.setLocationRelativeTo(null);
-                errorTip.setSize(400,150);
-                JLabel textLabel = new JLabel("错误代码：104  文件格式错误");
-                textLabel.setSize(350, 90);
-                textLabel.setFont(new Font("Rockwell", Font.BOLD, 20));
-                textLabel.setVisible(true) ;
-                errorTip.setDefaultCloseOperation(errorTip.getDefaultCloseOperation()); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
-                errorTip.setLayout(null);
-                errorTip.add(textLabel);
-                errorTip.setVisible(true);
-            }
-            else{
-                switch(gameController.loadGameFromFile(path)){
-                    case 0:
-                        chessboard.setVisible(false);
-                        remove(chessboard);
-                        chessboard = new Chessboard();
-                        gameController = new GameController(chessboard);
-                        chessboard.setLocation(HEIGTH / 10, HEIGTH / 10);
-                        chessboard.setFrame(this);
-                        label.add(chessboard);
-                        gameController.loadGameFromFile(path);
-                        break;
-                    case 101:
+            try{
+                String s = JOptionPane.showInputDialog(this,"Input Path here");
+                String path ="./resource/" + s;
+                if(!(s.equals(null))){
+                    if(!path.contains(".txt")){
                         JFrame errorTip = new JFrame("错误提示");
                         errorTip.setLocationRelativeTo(null);
                         errorTip.setSize(400,150);
-                        JLabel textLabel = new JLabel("错误代码：101  棋盘错误");
+                        JLabel textLabel = new JLabel("错误代码：104  文件格式错误");
                         textLabel.setSize(350, 90);
                         textLabel.setFont(new Font("Rockwell", Font.BOLD, 20));
                         textLabel.setVisible(true) ;
@@ -212,54 +190,84 @@ public class ChessGameFrame extends JFrame {
                         errorTip.setLayout(null);
                         errorTip.add(textLabel);
                         errorTip.setVisible(true);
-                        chessboard.retract(0);
-                        setStatusLabeText(chessboard.getCurrentColor());
-                        break;
-                    case 102:
-                        JFrame errorTip1 = new JFrame("错误提示");
-                        errorTip1.setLocationRelativeTo(null);
-                        errorTip1.setSize(400,150);
-                        JLabel textLabel1 = new JLabel("错误代码：102  棋子错误");
-                        textLabel1.setSize(350, 90);
-                        textLabel1.setFont(new Font("Rockwell", Font.BOLD, 20));
-                        textLabel1.setVisible(true) ;
-                        errorTip1.setDefaultCloseOperation(errorTip1.getDefaultCloseOperation()); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
-                        errorTip1.setLayout(null);
-                        errorTip1.add(textLabel1);
-                        errorTip1.setVisible(true);
-                        chessboard.retract(0);
-                        setStatusLabeText(chessboard.getCurrentColor());
-                        break;
-                    case 103:
-                        JFrame errorTip2 = new JFrame("错误提示");
-                        errorTip2.setLocationRelativeTo(null);
-                        errorTip2.setSize(400,150);
-                        JLabel textLabel2 = new JLabel("错误代码：103  缺少行棋方");
-                        textLabel2.setSize(350, 90);
-                        textLabel2.setFont(new Font("Rockwell", Font.BOLD, 20));
-                        textLabel2.setVisible(true) ;
-                        errorTip2.setDefaultCloseOperation(errorTip2.getDefaultCloseOperation()); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
-                        errorTip2.setLayout(null);
-                        errorTip2.add(textLabel2);
-                        errorTip2.setVisible(true);
-                        chessboard.retract(0);
-                        setStatusLabeText(chessboard.getCurrentColor());
-                        break;
-                    case 104 :
-                        JFrame errorTip3 = new JFrame("错误提示");
-                        errorTip3.setLocationRelativeTo(null);
-                        errorTip3.setSize(400,150);
-                        JLabel textLabel3 = new JLabel("错误代码：104  文件格式错误");
-                        textLabel3.setSize(350, 90);
-                        textLabel3.setFont(new Font("Rockwell", Font.BOLD, 20));
-                        textLabel3.setVisible(true) ;
-                        errorTip3.setDefaultCloseOperation(errorTip3.getDefaultCloseOperation()); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
-                        errorTip3.setLayout(null);
-                        errorTip3.add(textLabel3);
-                        errorTip3.setVisible(true);
+                    }
+                    else{
+                        switch(gameController.loadGameFromFile(path)){
+                            case 0:
+                                chessboard.setVisible(false);
+                                remove(chessboard);
+                                chessboard = new Chessboard();
+                                gameController = new GameController(chessboard);
+                                chessboard.setLocation(HEIGTH / 10, HEIGTH / 10);
+                                chessboard.setFrame(this);
+                                label.add(chessboard);
+                                gameController.loadGameFromFile(path);
+                                break;
+                            case 101:
+                                JFrame errorTip = new JFrame("错误提示");
+                                errorTip.setLocationRelativeTo(null);
+                                errorTip.setSize(400,150);
+                                JLabel textLabel = new JLabel("错误代码：101  棋盘错误");
+                                textLabel.setSize(350, 90);
+                                textLabel.setFont(new Font("Rockwell", Font.BOLD, 20));
+                                textLabel.setVisible(true) ;
+                                errorTip.setDefaultCloseOperation(errorTip.getDefaultCloseOperation()); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
+                                errorTip.setLayout(null);
+                                errorTip.add(textLabel);
+                                errorTip.setVisible(true);
+                                chessboard.retract(0);
+                                setStatusLabeText(chessboard.getCurrentColor());
+                                break;
+                            case 102:
+                                JFrame errorTip1 = new JFrame("错误提示");
+                                errorTip1.setLocationRelativeTo(null);
+                                errorTip1.setSize(400,150);
+                                JLabel textLabel1 = new JLabel("错误代码：102  棋子错误");
+                                textLabel1.setSize(350, 90);
+                                textLabel1.setFont(new Font("Rockwell", Font.BOLD, 20));
+                                textLabel1.setVisible(true) ;
+                                errorTip1.setDefaultCloseOperation(errorTip1.getDefaultCloseOperation()); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
+                                errorTip1.setLayout(null);
+                                errorTip1.add(textLabel1);
+                                errorTip1.setVisible(true);
+                                chessboard.retract(0);
+                                setStatusLabeText(chessboard.getCurrentColor());
+                                break;
+                            case 103:
+                                JFrame errorTip2 = new JFrame("错误提示");
+                                errorTip2.setLocationRelativeTo(null);
+                                errorTip2.setSize(400,150);
+                                JLabel textLabel2 = new JLabel("错误代码：103  缺少行棋方");
+                                textLabel2.setSize(350, 90);
+                                textLabel2.setFont(new Font("Rockwell", Font.BOLD, 20));
+                                textLabel2.setVisible(true) ;
+                                errorTip2.setDefaultCloseOperation(errorTip2.getDefaultCloseOperation()); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
+                                errorTip2.setLayout(null);
+                                errorTip2.add(textLabel2);
+                                errorTip2.setVisible(true);
+                                chessboard.retract(0);
+                                setStatusLabeText(chessboard.getCurrentColor());
+                                break;
+                            case 104 :
+                                JFrame errorTip3 = new JFrame("错误提示");
+                                errorTip3.setLocationRelativeTo(null);
+                                errorTip3.setSize(400,150);
+                                JLabel textLabel3 = new JLabel("错误代码：104  文件格式错误");
+                                textLabel3.setSize(350, 90);
+                                textLabel3.setFont(new Font("Rockwell", Font.BOLD, 20));
+                                textLabel3.setVisible(true) ;
+                                errorTip3.setDefaultCloseOperation(errorTip3.getDefaultCloseOperation()); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
+                                errorTip3.setLayout(null);
+                                errorTip3.add(textLabel3);
+                                errorTip3.setVisible(true);
+                        }
+                        resetTime();
+                    }
                 }
-                resetTime();
+
+            }catch (NullPointerException d){
             }
+
         });
         return button;
     }
@@ -277,7 +285,7 @@ public class ChessGameFrame extends JFrame {
                 System.out.println(chessboard.saveGame());
                 ps.close();
             } catch (FileNotFoundException ex) {
-                ex.printStackTrace();
+                //ex.printStackTrace();
             }
         });
         return button;
@@ -308,7 +316,7 @@ public class ChessGameFrame extends JFrame {
         button.addActionListener((e) ->
                 {
                     if(!(chessboard.retract(1))){
-                        JOptionPane.showMessageDialog(null,"You can't retract", "Message", JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(this,"You can't retract", "Message", JOptionPane.PLAIN_MESSAGE);
                     }
                     setStatusLabeText(chessboard.getCurrentColor());
                 }
@@ -318,11 +326,11 @@ public class ChessGameFrame extends JFrame {
     //胜利
     public void showVictory(){
         if(chessboard.getWinner() == ChessColor.BLACK){
-            JOptionPane.showMessageDialog(null,"黑方获胜！","Congratulations!", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(this,"黑方获胜！","Congratulations!", JOptionPane.PLAIN_MESSAGE);
         }
 
         else {
-            JOptionPane.showMessageDialog(null,"白方获胜！","Congratulations!", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(this,"白方获胜！","Congratulations!", JOptionPane.PLAIN_MESSAGE);
             score++;
             userRankLabel.setText("用户分数："+score);
         }
@@ -334,30 +342,34 @@ public class ChessGameFrame extends JFrame {
     //兵底线升变
     public void pawnChangeTo(ChessComponent chessComponent){
         Object[] chess = {"后", "车", "马", "象"};
-        int op = JOptionPane.showOptionDialog(null, "请选择要变成的棋子:\n","兵底线升变",
-                JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, chess, chess[0]);
-        int row = chessComponent.getChessboardPoint().getX(), col = chessComponent.getChessboardPoint().getY();
-        switch (op){
-            case 0 :
-                chessboard.putChessOnBoard(new QueenChessComponent(chessComponent.getChessboardPoint(), chessComponent.getLocation(),
-                        chessComponent.getChessColor(), chessboard.getMoveController(), chessboard.getClickController(), chessboard.getCHESS_SIZE()));
-                ChessComponent[][] q = chessboard.getChessComponents();q[row][col].repaint();break;
+        int op = -1;
+        while(op == -1){
+            op = JOptionPane.showOptionDialog(this, "请选择要变成的棋子:\n","兵底线升变",
+                    JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, chess, chess[0]);
+            int row = chessComponent.getChessboardPoint().getX(), col = chessComponent.getChessboardPoint().getY();
+            switch (op){
+                case 0 :
+                    chessboard.putChessOnBoard(new QueenChessComponent(chessComponent.getChessboardPoint(), chessComponent.getLocation(),
+                            chessComponent.getChessColor(), chessboard.getMoveController(), chessboard.getClickController(), chessboard.getCHESS_SIZE()));
+                    ChessComponent[][] q = chessboard.getChessComponents();q[row][col].repaint();break;
 
-            case 1 :
-                chessboard.putChessOnBoard(new RookChessComponent(chessComponent.getChessboardPoint(), chessComponent.getLocation(),
-                        chessComponent.getChessColor(), chessboard.getMoveController(), chessboard.getClickController(), chessboard.getCHESS_SIZE()));
-                ChessComponent[][] r = chessboard.getChessComponents();r[row][col].repaint();break;
+                case 1 :
+                    chessboard.putChessOnBoard(new RookChessComponent(chessComponent.getChessboardPoint(), chessComponent.getLocation(),
+                            chessComponent.getChessColor(), chessboard.getMoveController(), chessboard.getClickController(), chessboard.getCHESS_SIZE()));
+                    ChessComponent[][] r = chessboard.getChessComponents();r[row][col].repaint();break;
 
-            case 2 :
-                chessboard.putChessOnBoard(new KnightChessComponent(chessComponent.getChessboardPoint(), chessComponent.getLocation(),
-                        chessboard.getMoveController(), chessComponent.getChessColor(), chessboard.getClickController(), chessboard.getCHESS_SIZE()));
-                ChessComponent[][] n = chessboard.getChessComponents();n[row][col].repaint();break;
+                case 2 :
+                    chessboard.putChessOnBoard(new KnightChessComponent(chessComponent.getChessboardPoint(), chessComponent.getLocation(),
+                            chessboard.getMoveController(), chessComponent.getChessColor(), chessboard.getClickController(), chessboard.getCHESS_SIZE()));
+                    ChessComponent[][] n = chessboard.getChessComponents();n[row][col].repaint();break;
 
-            case 3 :
-                chessboard.putChessOnBoard(new BishopChessComponent(chessComponent.getChessboardPoint(), chessComponent.getLocation(),
-                        chessComponent.getChessColor(), chessboard.getMoveController(), chessboard.getClickController(), chessboard.getCHESS_SIZE()));
-                ChessComponent[][] b = chessboard.getChessComponents();b[row][col].repaint();break;
+                case 3 :
+                    chessboard.putChessOnBoard(new BishopChessComponent(chessComponent.getChessboardPoint(), chessComponent.getLocation(),
+                            chessComponent.getChessColor(), chessboard.getMoveController(), chessboard.getClickController(), chessboard.getCHESS_SIZE()));
+                    ChessComponent[][] b = chessboard.getChessComponents();b[row][col].repaint();break;
+            }
         }
+
     }
     //用户信息显示
     private JLabel addUserLabel() {

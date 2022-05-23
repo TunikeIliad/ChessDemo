@@ -174,6 +174,11 @@ public class PawnChessComponent extends ChessComponent{
                     }
 
                 }
+                if(getChessboardPoint().offset(0, i) != null && i != 0){
+                    view.ChessboardPoint p = getChessboardPoint().offset(0, i);
+                    ChessComponent c = chessComponents[p.getX()][p.getY()];
+                    if(c.checkPawnNear) way.add(c);
+                }
             }
         }
         if(getChessColor() == ChessColor.WHITE){
@@ -196,7 +201,11 @@ public class PawnChessComponent extends ChessComponent{
                         if(c.getChessColor() == ChessColor.BLACK)
                             way.add(c);
                     }
-
+                }
+                if(getChessboardPoint().offset(0, i) != null && i != 0){
+                    view.ChessboardPoint p = getChessboardPoint().offset(0, i);
+                    ChessComponent c = chessComponents[p.getX()][p.getY()];
+                    if(c.checkPawnNear) way.add(c);
                 }
             }
         }
@@ -213,6 +222,11 @@ public class PawnChessComponent extends ChessComponent{
                     if(c.getChessColor() == ChessColor.WHITE)
                         way.add(c);
                 }
+                if(getChessboardPoint().offset(0, i) != null){
+                    view.ChessboardPoint p = getChessboardPoint().offset(0, i);
+                    ChessComponent c = chessComponents[p.getX()][p.getY()];
+                    if(c.checkPawnNear) way.add(c);
+                }
             }
         }
         if(getChessColor() == ChessColor.WHITE){
@@ -223,6 +237,11 @@ public class PawnChessComponent extends ChessComponent{
                     ChessComponent c = chessComponents[p.getX()][p.getY()];
                     if(c.getChessColor() == ChessColor.BLACK)
                         way.add(c);
+                }
+                if(getChessboardPoint().offset(0, i) != null){
+                    view.ChessboardPoint p = getChessboardPoint().offset(0, i);
+                    ChessComponent c = chessComponents[p.getX()][p.getY()];
+                    if(c.checkPawnNear) way.add(c);
                 }
             }
         }
